@@ -1,1 +1,1 @@
-# Site
+JHEP Contact Site
