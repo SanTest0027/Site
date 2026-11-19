@@ -27,7 +27,9 @@ const KEBAJIKAN_URUSAN_LIST = [
   "Tuntutan Perbelanjaan Pembedahan",
   "Permohonan Surat Jaminan Pelajar (GL) ke Hospital dan Klinik Kerajaan",
   "Bantuan Rawatan di Institut Jantung Negara (IJN)",
-  "e-Tabung"
+  "e-Tabung",
+  "Bantuan Ihsan (Sakit dan Masuk Wad)",
+  "Skim Perlindungan Diri"
 ];
 
 const PILLARS_URUSAN_LIST = [
@@ -69,9 +71,9 @@ const STAFF_DATA = [
     photo: "cropped-images/staf-idayu.png",
     location: "Aras Bawah, Pejabat JHEP",
     email: "nuridayualias@unimap.edu.my",
-    helpsWith: ["Bantuan Kebajikan & Zakat", "e-Tabung & Tabung Kasih", "FoodBank & Kupon", "Tuntutan Insurans & GL Hospital", "Khairat Kematian"],
+    helpsWith: ["Bantuan Kebajikan & Zakat", "e-Tabung & Tabung Kasih", "Bantuan Ihsan (Sakit & Wad)", "Skim Perlindungan Diri", "Skim Pembelian Kaca Mata", "FoodBank & GL Hospital"],
     fullUrusan: KEBAJIKAN_URUSAN_LIST,
-    keywords: "kebajikan zakat e-tabung etabung tabung kasih awal pengajian oku laptop komputer riba hkc bantuan tunai kecemasan foodbank kupon makanan kaca mata ppe kematian khairat jenazah kesihatan insurans kemalangan rawatan hospital pembedahan surat jaminan gl ijn siti nur idayu"
+    keywords: "kebajikan zakat e-tabung etabung tabung kasih bantuan ihsan sakit masuk wad skim perlindungan diri skim pembelian kaca mata awal pengajian oku laptop komputer riba hkc bantuan tunai kecemasan foodbank kupon makanan ppe kematian khairat jenazah kesihatan insurans kemalangan rawatan hospital pembedahan surat jaminan gl ijn siti nur idayu"
   },
   {
     name: "Umar Mukhtar Bin Mahamad",
@@ -82,9 +84,9 @@ const STAFF_DATA = [
     initials: "UM",
     location: "Aras Bawah, Pejabat JHEP",
     email: "umarmukhtar@unimap.edu.my",
-    helpsWith: ["Bantuan Kebajikan & Zakat", "e-Tabung & Tabung Kasih", "FoodBank & Kupon", "Skim Laptop & OKU", "Insurans & GL Hospital"],
+    helpsWith: ["Bantuan Kebajikan & Zakat", "e-Tabung & Tabung Kasih", "Bantuan Ihsan (Sakit & Wad)", "Skim Perlindungan Diri", "Skim Pembelian Kaca Mata", "FoodBank & GL Hospital"],
     fullUrusan: KEBAJIKAN_URUSAN_LIST,
-    keywords: "kebajikan zakat e-tabung etabung tabung kasih awal pengajian oku laptop komputer riba hkc bantuan tunai kecemasan foodbank kupon makanan kaca mata ppe kematian khairat jenazah kesihatan insurans kemalangan rawatan hospital pembedahan surat jaminan gl ijn umar mukhtar"
+    keywords: "kebajikan zakat e-tabung etabung tabung kasih bantuan ihsan sakit masuk wad skim perlindungan diri skim pembelian kaca mata awal pengajian oku laptop komputer riba hkc bantuan tunai kecemasan foodbank kupon makanan ppe kematian khairat jenazah kesihatan insurans kemalangan rawatan hospital pembedahan surat jaminan gl ijn umar mukhtar"
   },
   {
     name: "Diza Ewana Bt Mohamad Drapi",
@@ -94,9 +96,9 @@ const STAFF_DATA = [
     photo: "cropped-images/staf-diza.png",
     location: "Aras Bawah, Pejabat JHEP",
     email: "diza@unimap.edu.my",
-    helpsWith: ["Bantuan Kebajikan & Zakat", "e-Tabung & Tabung Kasih", "FoodBank & Kupon", "Tuntutan Insurans & Rawatan", "Surat Jaminan (GL)"],
+    helpsWith: ["Bantuan Kebajikan & Zakat", "e-Tabung & Tabung Kasih", "Bantuan Ihsan (Sakit & Wad)", "Skim Perlindungan Diri", "Skim Pembelian Kaca Mata", "Surat Jaminan (GL)"],
     fullUrusan: KEBAJIKAN_URUSAN_LIST,
-    keywords: "kebajikan zakat e-tabung etabung tabung kasih awal pengajian oku laptop komputer riba hkc bantuan tunai kecemasan foodbank kupon makanan kaca mata ppe kematian khairat jenazah kesihatan insurans kemalangan rawatan hospital pembedahan surat jaminan gl ijn diza ewana"
+    keywords: "kebajikan zakat e-tabung etabung tabung kasih bantuan ihsan sakit masuk wad skim perlindungan diri skim pembelian kaca mata awal pengajian oku laptop komputer riba hkc bantuan tunai kecemasan foodbank kupon makanan ppe kematian khairat jenazah kesihatan insurans kemalangan rawatan hospital pembedahan surat jaminan gl ijn diza ewana"
   },
 
   // 3. Unit Pembiayaan (PDF Page 4 & 16.png & 17.png)
