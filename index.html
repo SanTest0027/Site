@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Direktori Staf & Panduan Urusan JHEP UniMAP</title>
-  <!-- Google Fonts: Plus Jakarta Sans &Merriweather/Serif accent -->
+  <title>JHEP Assist — Panduan Pantas Urusan Pelajar & Staf UniMAP</title>
+  <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 </head>
 <body>
 
-  <!-- 1. WELCOME HERO BANNER (No duplicate header — blends directly under Google Sites navbar) -->
+  <!-- 1. WELCOME HERO BANNER: JHEP ASSIST -->
   <section class="welcome-hero">
     <div class="hero-bg-photo"></div>
     <div class="hero-bg-overlay"></div>
@@ -22,7 +22,7 @@
       <div class="hero-text-col">
         <div class="welcome-pill-row">
           <span class="welcome-pill">
-            <i data-lucide="building-2" class="icon-xs"></i>
+            <i data-lucide="sparkles" class="icon-xs"></i>
             <span>JABATAN HAL EHWAL PELAJAR & ALUMNI (JHEP)</span>
           </span>
           <span class="hours-pill">
@@ -32,13 +32,13 @@
         </div>
 
         <h1 class="hero-big-title">
-          Direktori Staf &<br>
-          <span class="text-gradient-gold">Panduan Urusan Pelajar</span>
+          <span class="text-gradient-gold">JHEP Assist</span>
         </h1>
+        <p class="hero-tagline">Panduan Interaktif Urusan Pelajar & Direktori Pegawai JHEP UniMAP</p>
         <div class="gold-accent-bar"></div>
 
         <p class="hero-lead">
-          Selamat datang ke ruangan Hubungi & Panduan Kaunter JHEP Universiti Malaysia Perlis. Ketahui dengan pantas pegawai bertanggungjawab, lokasi kaunter, dan emel rasmi mengikut urusan anda.
+          Selamat datang ke <b>JHEP Assist</b>! Tak pasti nak jumpa siapa di pejabat JHEP? Cari isu atau urusan anda di bawah dan ketahui terus pegawai bertugas, aras lokasi, serta emel rasmi mereka.
         </p>
 
         <div class="hero-meta-badges">
@@ -54,11 +54,11 @@
 
         <div class="hero-cta-row">
           <a href="#urusan-finder" class="btn-hero-primary">
-            <i data-lucide="search" class="icon-sm"></i>
-            <span>Cari Urusan & Pegawai</span>
+            <i data-lucide="zap" class="icon-sm"></i>
+            <span>Mula Carian Pantas</span>
           </a>
           <a href="#top-leadership" class="btn-hero-glass">
-            <i data-lucide="award" class="icon-sm"></i>
+            <i data-lucide="crown" class="icon-sm"></i>
             <span>Pengurusan Tertinggi</span>
           </a>
         </div>
@@ -83,7 +83,75 @@
     </div>
   </section>
 
-  <!-- 2. PENGURUSAN TERTINGGI JHEP (Top 4 Heads Shining) -->
+  <!-- 2. CARIAN PANTAS PELAJAR & STAF (Placed FIRST before Majlis Tertinggi!) -->
+  <section class="vibe-finder-section" id="urusan-finder">
+    <div class="container finder-container">
+      
+      <div class="finder-header">
+        <span class="finder-eyebrow"><i data-lucide="compass" class="icon-xs"></i> CARIAN PANTAS PELAJAR & STAF</span>
+        <h2>Ada urusan apa kat JHEP hari ni? 🤔</h2>
+        <p>Klik topik urusan di bawah atau taip sahaja soalan anda — <b>JHEP Assist</b> tunjukkan pegawai yang tepat!</p>
+      </div>
+
+      <!-- Main Search Box -->
+      <div class="fun-search-bar">
+        <div class="search-icon-badge">
+          <i data-lucide="search" class="icon-sm"></i>
+        </div>
+        <input 
+          type="text" 
+          id="vibe-search-input" 
+          placeholder="Tanya JHEP Assist (cth: PTPTN, PILLARS, zakat, foodbank, bas, van, cenderahati, temu janji pengarah)..." 
+          autocomplete="off"
+          oninput="handleQuickSearch(this.value)"
+        >
+        <button id="btn-clear-vibe" class="vibe-clear-btn" onclick="clearVibeSearch()" style="display: none;" title="Kosongkan carian">
+          <i data-lucide="x" class="icon-xs"></i>
+        </button>
+      </div>
+
+      <!-- Fun Short Question Chips -->
+      <div class="short-questions-wrap">
+        <button class="question-chip active" onclick="askQuestion('', this)">✨ Semua Pegawai (17)</button>
+        <button class="question-chip" onclick="askQuestion('Temu Janji', this)">📅 Temu Janji & Surat Pengarah</button>
+        <button class="question-chip" onclick="askQuestion('Kebajikan', this)">💝 Kebajikan, Zakat & Hospital (GL)</button>
+        <button class="question-chip" onclick="askQuestion('PTPTN', this)">🎓 PTPTN & Pembiayaan</button>
+        <button class="question-chip" onclick="askQuestion('PILLARS', this)">⭐ Masalah PILLARS & Sukarelawan</button>
+        <button class="question-chip" onclick="askQuestion('Pengangkutan', this)">🚌 Tempahan Bas & Van</button>
+        <button class="question-chip" onclick="askQuestion('Aktiviti', this)">💡 Aktiviti, Kelab & Inovasi</button>
+        <button class="question-chip" onclick="askQuestion('MPP', this)">👑 MPP & Kepimpinan</button>
+        <button class="question-chip" onclick="askQuestion('Cenderahati', this)">🎁 Ambil Cenderahati</button>
+        <button class="question-chip" onclick="askQuestion('Kewangan', this)">💰 Hal Ehwal Kewangan</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. DIRECTORY OF OFFICERS (Interactive Cards with Expandable Urusan List & Copy Email) -->
+  <main class="container staff-directory-stream">
+    <div class="directory-top-meta">
+      <div>
+        <h3 id="current-view-title">Semua Pegawai & Kaunter Bertugas</h3>
+        <p class="directory-sub-hint">Klik <b>"Lihat Senarai Urusan"</b> pada kad untuk semak butiran lengkap, atau klik emel untuk berhubung.</p>
+      </div>
+      <span id="match-count-badge" class="count-pill">17 Pegawai</span>
+    </div>
+
+    <!-- Big Portrait Cards Grid -->
+    <div class="vibe-cards-grid" id="staff-grid">
+      <!-- Injected dynamically via app.js -->
+    </div>
+
+    <!-- Empty Search State -->
+    <div id="no-match-box" class="empty-vibe-state" style="display: none;">
+      <div class="empty-icon-wrap"><i data-lucide="sparkles"></i></div>
+      <h4>Hmm, tiada padanan tepat ditemui!</h4>
+      <p>Cuba kata kunci ringkas seperti <b>PTPTN</b>, <b>Pillars</b>, <b>Zakat</b>, <b>Bas</b>, <b>Van</b>, <b>Cenderahati</b>, atau klik butang di bawah untuk lihat semua pegawai.</p>
+      <button class="btn-reset-search" onclick="clearVibeSearch()">✨ Papar Semua Pegawai</button>
+    </div>
+  </main>
+
+  <!-- 4. PENGURUSAN TERTINGGI JHEP (Placed AFTER Carian Pantas Pelajar!) -->
   <section class="section-tertinggi" id="top-leadership">
     <div class="container">
       <div class="section-heading-center">
@@ -118,47 +186,47 @@
           </div>
         </div>
 
-        <!-- Timbalan Pengarah 1 -->
+        <!-- Timbalan Pengarah 1 (Updated: Cik Nurul Ashikin Binti Abdul Halim) -->
         <div class="lead-vibe-card">
           <div class="shine-aura warm-aura"></div>
           <div class="lead-rank-ribbon charcoal">
             Timbalan Pengarah 1
           </div>
           <div class="lead-img-showcase">
-            <img src="cropped-images/lead-safuraa.png" alt="Dr. Wan Safuraa Binti Wan Osman">
+            <img src="cropped-images/lead-ashikin.png" alt="Cik Nurul Ashikin Binti Abdul Halim">
           </div>
           <div class="lead-text">
-            <h3>Dr. Wan Safuraa</h3>
-            <p class="lead-full-title">Binti Wan Osman</p>
+            <h3>Cik Nurul Ashikin</h3>
+            <p class="lead-full-title">Binti Abdul Halim</p>
             <div class="lead-meta-stack">
               <div class="lead-location">
                 <i data-lucide="map-pin" class="icon-xs"></i> Aras 2, Pejabat JHEP
               </div>
-              <a href="mailto:wansafuraa@unimap.edu.my" class="lead-email-pill">
-                <i data-lucide="mail" class="icon-xs"></i> wansafuraa@unimap.edu.my
+              <a href="mailto:nurulashikin@unimap.edu.my" class="lead-email-pill">
+                <i data-lucide="mail" class="icon-xs"></i> nurulashikin@unimap.edu.my
               </a>
             </div>
           </div>
         </div>
 
-        <!-- Timbalan Pengarah 2 -->
+        <!-- Timbalan Pengarah 2 (Updated: Dr. Abdullah Bin Abdul Samat) -->
         <div class="lead-vibe-card">
           <div class="shine-aura warm-aura"></div>
           <div class="lead-rank-ribbon charcoal">
             Timbalan Pengarah 2
           </div>
           <div class="lead-img-showcase">
-            <img src="cropped-images/lead-hafiz.png" alt="Ts. Dr. Muhamad Hafiz Bin Ab Aziz">
+            <img src="cropped-images/lead-abdullah.png" alt="Dr. Abdullah Bin Abdul Samat">
           </div>
           <div class="lead-text">
-            <h3>Ts. Dr. Muhamad Hafiz</h3>
-            <p class="lead-full-title">Bin Ab Aziz</p>
+            <h3>Dr. Abdullah</h3>
+            <p class="lead-full-title">Bin Abdul Samat</p>
             <div class="lead-meta-stack">
               <div class="lead-location">
                 <i data-lucide="map-pin" class="icon-xs"></i> Aras 2, Pejabat JHEP
               </div>
-              <a href="mailto:mhafiz@unimap.edu.my" class="lead-email-pill">
-                <i data-lucide="mail" class="icon-xs"></i> mhafiz@unimap.edu.my
+              <a href="mailto:abdullahsamat@unimap.edu.my" class="lead-email-pill">
+                <i data-lucide="mail" class="icon-xs"></i> abdullahsamat@unimap.edu.my
               </a>
             </div>
           </div>
@@ -190,77 +258,17 @@
     </div>
   </section>
 
-  <!-- 3. INTERACTIVE QUESTION & SEARCH FINDER -->
-  <section class="vibe-finder-section" id="urusan-finder">
-    <div class="container finder-container">
-      
-      <div class="finder-header">
-        <span class="finder-eyebrow">CARIAN PANTAS PELAJAR & STAF</span>
-        <h2>Ada urusan apa kat JHEP hari ni? 🤔</h2>
-        <p>Pilih soalan lazim di bawah atau taip urusan anda untuk melihat pegawai & kaunter bertugas:</p>
-      </div>
-
-      <!-- Main Search Box -->
-      <div class="fun-search-bar">
-        <div class="search-icon-badge">
-          <i data-lucide="search" class="icon-sm"></i>
-        </div>
-        <input 
-          type="text" 
-          id="vibe-search-input" 
-          placeholder="Taip urusan atau nama pegawai (cth: PTPTN, PILLARS, cenderahati, bas, zakat, kelab)..." 
-          autocomplete="off"
-          oninput="handleQuickSearch(this.value)"
-        >
-        <button id="btn-clear-vibe" class="vibe-clear-btn" onclick="clearVibeSearch()" style="display: none;" title="Kosongkan carian">
-          <i data-lucide="x" class="icon-xs"></i>
-        </button>
-      </div>
-
-      <!-- Short Question Bubbles -->
-      <div class="short-questions-wrap">
-        <button class="question-chip active" onclick="askQuestion('', this)">✨ Semua Unit & Pegawai</button>
-        <button class="question-chip" onclick="askQuestion('PTPTN', this)">🎓 Nak semak PTPTN / Biasiswa?</button>
-        <button class="question-chip" onclick="askQuestion('PILLARS', this)">⭐ Rekod PILLARS tak masuk?</button>
-        <button class="question-chip" onclick="askQuestion('Cenderahati', this)">🎁 Nak ambil cenderahati rasmi?</button>
-        <button class="question-chip" onclick="askQuestion('Zakat', this)">🤝 Mohon Zakat / FoodBank / GL?</button>
-        <button class="question-chip" onclick="askQuestion('Bas', this)">🚌 Jadual & tempahan bas?</button>
-        <button class="question-chip" onclick="askQuestion('Kelab', this)">💡 Kertas kerja kelab / inovasi?</button>
-        <button class="question-chip" onclick="askQuestion('MPP', this)">👥 Urusan MPP & kepimpinan?</button>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- 4. DIRECTORY OF OFFICERS (Big Upscaled Portraits + Location + Email) -->
-  <main class="container staff-directory-stream">
-    <div class="directory-top-meta">
-      <div>
-        <h3 id="current-view-title">Semua Pegawai & Kaunter Bertugas</h3>
-        <p class="directory-sub-hint">Hadir terus ke lokasi kaunter tertera atau hubungi melalui emel rasmi universiti.</p>
-      </div>
-      <span id="match-count-badge" class="count-pill">17 Pegawai</span>
-    </div>
-
-    <!-- Big Portrait Cards Grid -->
-    <div class="vibe-cards-grid" id="staff-grid">
-      <!-- Injected dynamically via app.js -->
-    </div>
-
-    <!-- Empty Search State -->
-    <div id="no-match-box" class="empty-vibe-state" style="display: none;">
-      <div class="empty-icon-wrap"><i data-lucide="compass"></i></div>
-      <h4>Tiada padanan ditemui untuk carian tersebut</h4>
-      <p>Cuba kata kunci ringkas seperti <b>PTPTN</b>, <b>Pillars</b>, <b>Bas</b>, <b>Zakat</b>, <b>Cenderahati</b>, atau hadir terus ke <b>Kaunter Utama Aras 1 Bangunan JHEP</b>.</p>
-      <button class="btn-reset-search" onclick="clearVibeSearch()">Papar Semua Pegawai</button>
-    </div>
-  </main>
+  <!-- Toast Notification for Copy Email -->
+  <div id="copy-toast" class="copy-toast">
+    <i data-lucide="check-circle-2" class="icon-sm"></i>
+    <span id="copy-toast-text">Emel berjaya disalin!</span>
+  </div>
 
   <!-- Modern Footer Matching e-JHEP Theme -->
   <footer class="simple-footer">
     <div class="container footer-inner">
       <div class="footer-brand-text">
-        <strong>JABATAN HAL EHWAL PELAJAR & ALUMNI (JHEP)</strong>
+        <strong>JHEP ASSIST • JABATAN HAL EHWAL PELAJAR & ALUMNI (JHEP)</strong>
         <span>Universiti Malaysia Perlis (UniMAP) • Kampus Alam Pauh Putra, 02600 Arau, Perlis</span>
       </div>
       <div class="footer-right-col">
