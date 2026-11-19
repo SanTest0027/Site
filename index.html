@@ -83,7 +83,7 @@
     </div>
   </section>
 
-  <!-- 2. CARIAN PANTAS PELAJAR & STAF (Placed FIRST before Majlis Tertinggi!) -->
+  <!-- 2. CARIAN PANTAS PELAJAR & STAF ("Ada urusan apa kat JHEP hari ni?") -->
   <section class="vibe-finder-section" id="urusan-finder">
     <div class="container finder-container">
       
@@ -127,31 +127,7 @@
     </div>
   </section>
 
-  <!-- 3. DIRECTORY OF OFFICERS (Interactive Cards with Expandable Urusan List & Copy Email) -->
-  <main class="container staff-directory-stream">
-    <div class="directory-top-meta">
-      <div>
-        <h3 id="current-view-title">Semua Pegawai & Kaunter Bertugas</h3>
-        <p class="directory-sub-hint">Klik <b>"Lihat Senarai Urusan"</b> pada kad untuk semak butiran lengkap, atau klik emel untuk berhubung.</p>
-      </div>
-      <span id="match-count-badge" class="count-pill">17 Pegawai</span>
-    </div>
-
-    <!-- Big Portrait Cards Grid -->
-    <div class="vibe-cards-grid" id="staff-grid">
-      <!-- Injected dynamically via app.js -->
-    </div>
-
-    <!-- Empty Search State -->
-    <div id="no-match-box" class="empty-vibe-state" style="display: none;">
-      <div class="empty-icon-wrap"><i data-lucide="sparkles"></i></div>
-      <h4>Hmm, tiada padanan tepat ditemui!</h4>
-      <p>Cuba kata kunci ringkas seperti <b>PTPTN</b>, <b>Pillars</b>, <b>Zakat</b>, <b>Bas</b>, <b>Van</b>, <b>Cenderahati</b>, atau klik butang di bawah untuk lihat semua pegawai.</p>
-      <button class="btn-reset-search" onclick="clearVibeSearch()">✨ Papar Semua Pegawai</button>
-    </div>
-  </main>
-
-  <!-- 4. PENGURUSAN TERTINGGI JHEP (Placed AFTER Carian Pantas Pelajar!) -->
+  <!-- 3. PENGURUSAN TERTINGGI JHEP (Right after "Ada urusan apa" question!) -->
   <section class="section-tertinggi" id="top-leadership">
     <div class="container">
       <div class="section-heading-center">
@@ -257,6 +233,30 @@
       </div>
     </div>
   </section>
+
+  <!-- 4. DIRECTORY OF OFFICERS (List of people in the organization) -->
+  <main class="container staff-directory-stream" id="staff-directory-section">
+    <div class="directory-top-meta">
+      <div>
+        <h3 id="current-view-title">Senarai Pegawai & Kaunter Bertugas</h3>
+        <p class="directory-sub-hint">Klik <b>"Lihat Senarai Penuh Urusan"</b> pada kad untuk semak butiran lengkap, atau klik emel untuk berhubung.</p>
+      </div>
+      <span id="match-count-badge" class="count-pill">17 Pegawai</span>
+    </div>
+
+    <!-- Big Portrait Cards Grid -->
+    <div class="vibe-cards-grid" id="staff-grid">
+      <!-- Injected dynamically via app.js -->
+    </div>
+
+    <!-- Empty Search State -->
+    <div id="no-match-box" class="empty-vibe-state" style="display: none;">
+      <div class="empty-icon-wrap"><i data-lucide="sparkles"></i></div>
+      <h4>Hmm, tiada padanan tepat ditemui!</h4>
+      <p>Cuba kata kunci ringkas seperti <b>PTPTN</b>, <b>Pillars</b>, <b>Zakat</b>, <b>Bas</b>, <b>Van</b>, <b>Cenderahati</b>, atau klik butang di bawah untuk lihat semua pegawai.</p>
+      <button class="btn-reset-search" onclick="clearVibeSearch()">✨ Papar Semua Pegawai</button>
+    </div>
+  </main>
 
   <!-- Toast Notification for Copy Email -->
   <div id="copy-toast" class="copy-toast">
