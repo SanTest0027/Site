@@ -1477,7 +1477,7 @@ body {
   z-index: 500;
   background: var(--site-cream-light);
   width: 100%;
-  height: 100dvh;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -2141,11 +2141,11 @@ body {
   40%           { transform: scale(1.1); opacity: 1; }
 }
 
-/* Bottom Composer (Pinned cleanly at bottom of 100dvh!) */
+/* Bottom Composer (Pinned cleanly at bottom with room for centered mode pill underneath) */
 .jhep-ai-composer-wrap {
   background: var(--white);
   border-top: 1.5px solid var(--site-border);
-  padding: 12px 18px calc(12px + env(safe-area-inset-bottom)) 18px;
+  padding: 10px 18px calc(68px + env(safe-area-inset-bottom)) 18px;
   flex-shrink: 0;
 }
 
@@ -2448,57 +2448,44 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   Always-Accessible Vertical Up/Down Mode Switcher (Sliding Gold Pill)
+   Fixed Bottom-Center Horizontal Left/Right Mode Switcher (Outline Stays Put!)
    ========================================================================== */
 .floating-mode-dock {
   position: fixed;
-  bottom: 72px;
-  right: 18px;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 650;
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  width: 248px;
+  max-width: calc(100vw - 28px);
   background: var(--charcoal-900);
   border: 2px solid var(--jhep-gold);
-  border-radius: 18px;
+  border-radius: var(--radius-full);
   padding: 4px;
-  box-shadow: 0 12px 30px rgba(24, 28, 34, 0.36);
-  transition: bottom 0.24s ease;
+  box-shadow: 0 10px 28px rgba(24, 28, 34, 0.34);
 }
 
-/* Smoothly sliding gold pill indicator */
+/* Smoothly sliding gold pill indicator (glides Left <-> Right inside stationary outline) */
 .dock-active-pill {
   position: absolute;
   top: 4px;
+  bottom: 4px;
   left: 4px;
-  right: 4px;
-  height: calc(50% - 4px);
-  border-radius: 13px;
+  width: calc(50% - 4px);
+  border-radius: var(--radius-full);
   background: linear-gradient(135deg, #fbbf24 0%, #e5a00d 100%);
   box-shadow: 0 4px 12px rgba(229, 160, 13, 0.36);
-  transform: translateY(0);
-  transition: transform 0.28s cubic-bezier(0.34, 1.25, 0.64, 1);
+  transform: translateX(0);
+  transition: transform 0.28s cubic-bezier(0.34, 1.22, 0.64, 1);
   pointer-events: none;
   z-index: 0;
 }
 
-/* Slide the gold pill down to Tanya AI when in chat mode */
+/* Slide the gold pill smoothly to the right (Tanya AI) without moving the outer pill */
 .floating-mode-dock.in-chat-mode .dock-active-pill {
-  transform: translateY(100%);
-}
-
-/* In full-screen AI Chatbot mode, lift above the bottom composer so it never overlaps the Send button */
-.floating-mode-dock.in-chat-mode {
-  bottom: 112px;
-}
-
-/* Google Sites iframe embed fix: account for Google Sites top bar (~58px) so chat composer is immediately visible without swiping! */
-body.is-embedded .chatbot-fullscreen-wrapper {
-  height: calc(100dvh - 58px);
-  bottom: auto;
-}
-
-body.is-embedded .floating-mode-dock.in-chat-mode {
-  bottom: 146px;
+  transform: translateX(100%);
 }
 
 .dock-mode-btn {
@@ -2508,10 +2495,10 @@ body.is-embedded .floating-mode-dock.in-chat-mode {
   color: #d1d5db;
   border: none;
   font-family: var(--font-family);
-  font-size: 0.74rem;
+  font-size: 0.78rem;
   font-weight: 800;
-  padding: 8px 13px;
-  border-radius: 13px;
+  padding: 8px 12px;
+  border-radius: var(--radius-full);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -2531,6 +2518,11 @@ body.is-embedded .floating-mode-dock.in-chat-mode {
 
 .dock-mode-btn.active:hover {
   color: var(--charcoal-900);
+}
+
+/* Give Directory footer breathing room above the centered bottom toggle */
+.simple-footer {
+  padding-bottom: 84px;
 }
 
 /* ==========================================================================
@@ -2743,7 +2735,7 @@ body.is-embedded .floating-mode-dock.in-chat-mode {
   }
 
   .jhep-ai-scroll {
-    padding: 14px 12px 90px 12px;
+    padding: 14px 12px 24px 12px;
   }
 
   .ai-hero-greeting h3 {
@@ -2755,7 +2747,7 @@ body.is-embedded .floating-mode-dock.in-chat-mode {
   }
 
   .jhep-ai-composer-wrap {
-    padding: 10px 12px calc(10px + env(safe-area-inset-bottom)) 12px;
+    padding: 8px 12px calc(62px + env(safe-area-inset-bottom)) 12px;
   }
 
   .jhep-ai-caption {
@@ -2763,36 +2755,21 @@ body.is-embedded .floating-mode-dock.in-chat-mode {
   }
 
   .floating-mode-dock {
-    bottom: 88px;
-    right: 12px;
-    border-radius: 16px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    width: 236px;
     padding: 3px;
   }
 
   .dock-active-pill {
     top: 3px;
+    bottom: 3px;
     left: 3px;
-    right: 3px;
-    height: calc(50% - 3px);
-    border-radius: 12px;
-  }
-
-  .floating-mode-dock.in-chat-mode {
-    bottom: 116px;
-  }
-
-  body.is-embedded .chatbot-fullscreen-wrapper {
-    height: calc(100dvh - 64px);
-    bottom: auto;
-  }
-
-  body.is-embedded .floating-mode-dock.in-chat-mode {
-    bottom: 146px;
+    width: calc(50% - 3px);
   }
 
   .dock-mode-btn {
-    padding: 7px 11px;
-    font-size: 0.72rem;
+    padding: 7px 10px;
+    font-size: 0.74rem;
   }
 
   .welcome-modal-card {

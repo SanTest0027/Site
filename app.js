@@ -1214,7 +1214,7 @@ function askAiChatbot(text) {
     </div>
   `;
   col.appendChild(assistantTurn);
-  scroll.scrollTop = scroll.scrollHeight;
+  scroll.scrollTo({ top: Math.max(0, userBubble.offsetTop - 14), behavior: "smooth" });
 
   // 3. Search Unified HEPA + Pembiayaan Knowledge Base
   const result = searchKnowledgeBase(query, aiCurrentLang);
@@ -1280,6 +1280,8 @@ function askAiChatbot(text) {
       bodyEl.appendChild(fRow);
     }
 
-    scroll.scrollTop = scroll.scrollHeight;
+    // Gemini-style scroll: keep the user's question anchored at the top so the full answer reads naturally downward
+    const targetTop = Math.max(0, userBubble.offsetTop - 14);
+    scroll.scrollTo({ top: targetTop, behavior: "smooth" });
   }, 260);
 }
