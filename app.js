@@ -357,6 +357,15 @@ const STAFF_DATA = [
 
 // Initialize on load
 document.addEventListener("DOMContentLoaded", () => {
+  // Detect when embedded inside Google Sites iframe so chatbot height accounts for Google Sites header
+  try {
+    if (window.self !== window.top) {
+      document.body.classList.add("is-embedded");
+    }
+  } catch (e) {
+    document.body.classList.add("is-embedded");
+  }
+
   renderStaffList(STAFF_DATA);
   updateLiveOperatingStatus();
   setInterval(updateLiveOperatingStatus, 60000);

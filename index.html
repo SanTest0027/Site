@@ -463,13 +463,13 @@
     </div>
   </div>
 
-  <!-- Always-Accessible Vertical Up/Down Mode Switcher at BOTTOM RIGHT (No green dot) -->
+  <!-- Always-Accessible Vertical Up/Down Mode Switcher at BOTTOM RIGHT (Sliding Gold Pill) -->
   <div id="floating-mode-dock" class="floating-mode-dock" role="group" aria-label="Tukar paparan Direktori atau AI Chatbot">
+    <span class="dock-active-pill" aria-hidden="true"></span>
     <button type="button" id="dockBtnDirectory" class="dock-mode-btn active" onclick="switchHubMode('directory', false)" title="Direktori Pegawai (PIC)">
       <i data-lucide="users" class="icon-xs"></i>
       <span>Direktori</span>
     </button>
-    <div class="dock-divider"></div>
     <button type="button" id="dockBtnChatbot" class="dock-mode-btn" onclick="switchHubMode('chatbot', false)" title="TanyaJHEP AI Chatbot">
       <i data-lucide="bot" class="icon-xs"></i>
       <span>Tanya AI</span>

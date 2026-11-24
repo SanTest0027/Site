@@ -2448,21 +2448,42 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   Always-Accessible Vertical Up/Down Mode Switcher at BOTTOM RIGHT
+   Always-Accessible Vertical Up/Down Mode Switcher (Sliding Gold Pill)
    ========================================================================== */
 .floating-mode-dock {
   position: fixed;
   bottom: 72px;
   right: 18px;
   z-index: 650;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   background: var(--charcoal-900);
   border: 2px solid var(--jhep-gold);
   border-radius: 18px;
   padding: 4px;
   box-shadow: 0 12px 30px rgba(24, 28, 34, 0.36);
-  transition: bottom 0.22s ease, transform 0.22s ease;
+  transition: bottom 0.24s ease;
+}
+
+/* Smoothly sliding gold pill indicator */
+.dock-active-pill {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  height: calc(50% - 4px);
+  border-radius: 13px;
+  background: linear-gradient(135deg, #fbbf24 0%, #e5a00d 100%);
+  box-shadow: 0 4px 12px rgba(229, 160, 13, 0.36);
+  transform: translateY(0);
+  transition: transform 0.28s cubic-bezier(0.34, 1.25, 0.64, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Slide the gold pill down to Tanya AI when in chat mode */
+.floating-mode-dock.in-chat-mode .dock-active-pill {
+  transform: translateY(100%);
 }
 
 /* In full-screen AI Chatbot mode, lift above the bottom composer so it never overlaps the Send button */
@@ -2470,7 +2491,19 @@ body::-webkit-scrollbar,
   bottom: 112px;
 }
 
+/* Google Sites iframe embed fix: account for Google Sites top bar (~58px) so chat composer is immediately visible without swiping! */
+body.is-embedded .chatbot-fullscreen-wrapper {
+  height: calc(100dvh - 58px);
+  bottom: auto;
+}
+
+body.is-embedded .floating-mode-dock.in-chat-mode {
+  bottom: 146px;
+}
+
 .dock-mode-btn {
+  position: relative;
+  z-index: 1;
   background: transparent;
   color: #d1d5db;
   border: none;
@@ -2485,24 +2518,19 @@ body::-webkit-scrollbar,
   justify-content: center;
   gap: 6px;
   white-space: nowrap;
-  transition: var(--transition);
+  transition: color 0.22s ease;
 }
 
 .dock-mode-btn:hover {
   color: #fde68a;
-  background: rgba(255, 255, 255, 0.08);
 }
 
 .dock-mode-btn.active {
-  background: linear-gradient(135deg, #fbbf24 0%, #e5a00d 100%);
   color: var(--charcoal-900);
-  box-shadow: 0 4px 12px rgba(229, 160, 13, 0.32);
 }
 
-.dock-divider {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.14);
-  margin: 3px 8px;
+.dock-mode-btn.active:hover {
+  color: var(--charcoal-900);
 }
 
 /* ==========================================================================
@@ -2741,8 +2769,25 @@ body::-webkit-scrollbar,
     padding: 3px;
   }
 
+  .dock-active-pill {
+    top: 3px;
+    left: 3px;
+    right: 3px;
+    height: calc(50% - 3px);
+    border-radius: 12px;
+  }
+
   .floating-mode-dock.in-chat-mode {
-    bottom: 118px;
+    bottom: 116px;
+  }
+
+  body.is-embedded .chatbot-fullscreen-wrapper {
+    height: calc(100dvh - 64px);
+    bottom: auto;
+  }
+
+  body.is-embedded .floating-mode-dock.in-chat-mode {
+    bottom: 146px;
   }
 
   .dock-mode-btn {
