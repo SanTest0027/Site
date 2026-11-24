@@ -321,14 +321,13 @@ const STAFF_DATA = [
   },
   {
     name: "Mohd Khairul Effendi Bin Che Wan",
-    role: "Penolong Pegawai Tadbir (Pegawai Kewangan)",
+    role: "Penolong Pegawai Tadbir",
     unit: "Unit Pentadbiran & Kewangan",
-    tag: "Pegawai Kewangan • Protokol & PA System",
+    tag: "Protokol, PA System & Grafik",
     photo: "cropped-images/staf-khairul.png",
     location: "Aras Bawah, Pejabat JHEP",
     email: "khairul.effendi@unimap.edu.my",
     helpsWith: [
-      "Pegawai Kewangan",
       "Protokol Program (VIP/VVIP)",
       "Peminjaman PA System / Portable",
       "Semakan Grafik (Banner/Backdrop)"
@@ -336,10 +335,9 @@ const STAFF_DATA = [
     fullUrusan: [
       "Protokol Program (Semakan dan Penasihatan Protokol Penganjuran Program / Aktiviti Pelajar Peringkat Universiti) — Semakan susunan protokol, atur cara majlis, jemputan VIP/VVIP, susunan tempat duduk dan tatacara majlis.",
       "Permohonan Peminjaman PA System / Portable — Pengurusan permohonan, semakan ketersediaan dan penyelarasan peminjaman peralatan audio (PA System, Portable, speaker, mikrofon, pembesar suara).",
-      "Semakan Grafik (Semakan dan Penasihatan Grafik dan Reka Bentuk Banner / Backdrop Program) — Semakan reka bentuk, penggunaan logo rasmi, warna korporat, susunan logo dan pematuhan protokol identiti universiti.",
-      "Hal Ehwal Kewangan — Pengurusan dan semakan hal ehwal kewangan berkaitan di bawah Unit Pentadbiran & Kewangan JHEP."
+      "Semakan Grafik (Semakan dan Penasihatan Grafik dan Reka Bentuk Banner / Backdrop Program) — Semakan reka bentuk, penggunaan logo rasmi, warna korporat, susunan logo dan pematuhan protokol identiti universiti."
     ],
-    keywords: "pegawai kewangan penolong pegawai tadbir protokol program vip vvip atur cara susunan majlis jemputan rasmi tempat duduk tatacara majlis permohonan peminjaman pa system portable speaker mikrofon pembesar suara audio semakan grafik reka bentuk banner backdrop bunting logo warna korporat identiti korporat universiti tuntutan kewangan khairul effendi che wan"
+    keywords: "penolong pegawai tadbir protokol program vip vvip atur cara susunan majlis jemputan rasmi tempat duduk tatacara majlis permohonan peminjaman pinjam pa system sistem portable speaker mikrofon mic pembesar suara sound audio semakan grafik reka bentuk design banner backdrop bunting poster logo warna korporat identiti korporat universiti khairul effendi che wan"
   },
   {
     name: "Nor Faezah Binti Mirdukhim @ Mustapa",
@@ -577,8 +575,117 @@ function askQuestion(keyword, btnEl) {
 }
 
 /**
- * Fast search filter logic
+ * Smart Natural-Language & Any-Keyword Search Engine
+ * Handles conversational sentences (e.g., "nak pinjam pa system", "ambil baju jaket")
+ * and matches if ANY meaningful keyword hits, ranked by relevance.
  */
+const SEARCH_STOP_WORDS = new Set([
+  "nak", "saya", "kami", "kita", "awak", "anda", "dia", "mereka",
+  "macam", "mana", "bagaimana", "kenapa", "mengapa", "bila", "siapa", "apa",
+  "kat", "dekat", "di", "ke", "dari", "daripada", "pada", "untuk", "bagi",
+  "dengan", "dan", "atau", "serta", "yang", "ada", "tiada", "tak", "tidak", "x",
+  "boleh", "tolong", "minta", "mintak", "tanya", "bertanya", "berkaitan",
+  "pasal", "tentang", "isu", "masalah", "urusan", "kes", "hal", "ehwal",
+  "cara", "langkah", "proses", "buat", "dapatkan", "dapat", "cari", "jumpa",
+  "berjumpa", "hubungi", "pegawai", "staf", "staff", "kaunter", "unit",
+  "bahagian", "jabatan", "pejabat", "jhep", "unimap", "pelajar", "mahasiswa",
+  "universiti", "ya", "ye", "ni", "ini", "itu", "tu", "lah", "la", "je", "ja",
+  "sahaja", "saja", "dah", "sudah", "belum", "masih", "lagi", "pun", "juga",
+  "kalau", "jika", "sekiranya", "i", "want", "to", "need", "how", "where",
+  "who", "can", "get", "the", "a", "an", "for", "in", "on", "at", "of", "and", "or"
+]);
+
+const GENERIC_ACTION_WORDS = new Set([
+  "pinjam", "peminjaman", "meminjam", "pinjaman",
+  "tempah", "tempahan", "menempah", "book", "booking",
+  "semak", "semakan", "menyemak", "check", "cek",
+  "mohon", "permohonan", "memohon", "apply",
+  "daftar", "pendaftaran", "mendaftar",
+  "tuntut", "tuntutan", "claim",
+  "ambil", "pengambilan", "mengambil",
+  "hantar", "serah", "serahan", "masuk", "kemasukan",
+  "penganjuran", "pengurusan", "penyelarasan",
+  "program", "aktiviti", "borang", "dokumen", "surat", "status", "rekod", "sistem",
+  "rasmi", "korporat", "majlis"
+]);
+
+const SYNONYM_EXPAND = {
+  "pinjam": ["pinjam", "peminjaman", "pinjaman"],
+  "peminjaman": ["peminjaman", "pinjam"],
+  "tempah": ["tempah", "tempahan"],
+  "tempahan": ["tempahan", "tempah"],
+  "book": ["tempah", "tempahan"],
+  "booking": ["tempah", "tempahan"],
+  "semak": ["semak", "semakan"],
+  "semakan": ["semakan", "semak"],
+  "check": ["semak", "semakan"],
+  "cek": ["semak", "semakan"],
+  "mohon": ["mohon", "permohonan"],
+  "permohonan": ["permohonan", "mohon"],
+  "tuntut": ["tuntut", "tuntutan"],
+  "tuntutan": ["tuntutan", "tuntut"],
+  "claim": ["tuntutan", "insurans"],
+  "bayar": ["bayar", "bayaran", "pembayaran"],
+  "bayaran": ["bayaran", "pembayaran"],
+  "rawat": ["rawat", "rawatan"],
+  "pindah": ["pindah", "pindahan", "pemindahan", "transfer"],
+  "pakai": ["pakai", "pakaian", "baju"],
+  "pakaian": ["pakaian", "baju", "jaket"],
+  "tshirt": ["tshirt", "shirt", "baju"],
+  "jacket": ["jaket"],
+  "mic": ["mikrofon", "pa"],
+  "sound": ["audio", "speaker", "pa"],
+  "spek": ["kaca", "mata"],
+  "cermin": ["kaca", "mata"],
+  "ward": ["wad", "hospital"],
+  "bus": ["bas"],
+  "room": ["bilik"],
+  "gift": ["cenderahati"],
+  "souvenir": ["cenderahati"]
+};
+
+function buildStaffSearchIndex(item) {
+  const cleanNegations = (str) => (str || "").toLowerCase().replace(/selain\s+pa\s+system/g, "");
+  const primaryText = cleanNegations(`${item.name} ${item.tag} ${(item.helpsWith || []).join(" ")} ${item.keywords || ""}`);
+  const secondaryText = cleanNegations(`${item.role} ${item.location} ${item.email} ${(item.fullUrusan || []).join(" ")}`);
+  const fullText = `${primaryText} ${secondaryText}`;
+  const words = fullText.split(/[^a-z0-9]+/).filter(Boolean);
+  const primaryWords = new Set(primaryText.split(/[^a-z0-9]+/).filter(Boolean));
+  return { fullText, primaryText, words, wordSet: new Set(words), primaryWords };
+}
+
+function tokenMatchesDoc(token, doc) {
+  const variants = SYNONYM_EXPAND[token] || [token];
+  let bestWeight = 0;
+
+  for (const v of variants) {
+    if (!v) continue;
+    if (v.length <= 3) {
+      // Short words (e.g. "pa", "gl", "oku", "mpp", "vip", "van", "bas", "ijn") MUST match exact whole word
+      if (doc.primaryWords.has(v)) {
+        bestWeight = Math.max(bestWeight, 14);
+      } else if (doc.wordSet.has(v)) {
+        bestWeight = Math.max(bestWeight, 9);
+      }
+    } else {
+      // 4+ char words match exact whole word first, then prefix match on words >= 4 chars (avoids "janji" matching "perjanjian")
+      if (doc.primaryWords.has(v)) {
+        bestWeight = Math.max(bestWeight, 15);
+      } else if (doc.wordSet.has(v)) {
+        bestWeight = Math.max(bestWeight, 10);
+      } else {
+        for (const w of doc.words) {
+          if (w.length >= 4 && (w.startsWith(v) || (v.length >= 5 && v.startsWith(w)))) {
+            bestWeight = Math.max(bestWeight, doc.primaryWords.has(w) ? 8 : 5);
+            break;
+          }
+        }
+      }
+    }
+  }
+  return bestWeight;
+}
+
 function handleQuickSearch(query, resetChips = true) {
   const clean = query.trim().toLowerCase();
   const clearBtn = document.getElementById("btn-clear-vibe");
@@ -597,19 +704,70 @@ function handleQuickSearch(query, resetChips = true) {
 
   clearBtn.style.display = "flex";
 
-  const matches = STAFF_DATA.filter(item => {
-    return item.name.toLowerCase().includes(clean) ||
-           item.role.toLowerCase().includes(clean) ||
-           item.unit.toLowerCase().includes(clean) ||
-           item.tag.toLowerCase().includes(clean) ||
-           item.location.toLowerCase().includes(clean) ||
-           item.email.toLowerCase().includes(clean) ||
-           item.keywords.toLowerCase().includes(clean) ||
-           item.helpsWith.some(h => h.toLowerCase().includes(clean)) ||
-           (item.fullUrusan && item.fullUrusan.some(u => u.toLowerCase().includes(clean)));
+  // Tokenize user input
+  const rawTokens = clean.split(/[^a-z0-9]+/).filter(Boolean);
+  let meaningfulTokens = rawTokens.filter(t => !SEARCH_STOP_WORDS.has(t));
+  if (meaningfulTokens.length === 0) {
+    meaningfulTokens = rawTokens;
+  }
+
+  // Separate specific topic nouns/names from generic action words (e.g. "pinjam", "semak", "tempah")
+  const topicTokens = meaningfulTokens.filter(t => !GENERIC_ACTION_WORDS.has(t));
+  const actionTokens = meaningfulTokens.filter(t => GENERIC_ACTION_WORDS.has(t));
+
+  const scoredMatches = [];
+
+  STAFF_DATA.forEach((item, originalIndex) => {
+    const doc = buildStaffSearchIndex(item);
+    let score = 0;
+    let matchedTopicCount = 0;
+    let matchedActionCount = 0;
+
+    // Full phrase bonus if exact phrase appears
+    if (clean.length >= 3 && doc.fullText.includes(clean)) {
+      score += 50;
+    }
+
+    // Score specific topic keywords
+    for (const tok of topicTokens) {
+      const w = tokenMatchesDoc(tok, doc);
+      if (w > 0) {
+        score += w * 3;
+        matchedTopicCount++;
+      }
+    }
+
+    // Score generic action words
+    for (const tok of actionTokens) {
+      const w = tokenMatchesDoc(tok, doc);
+      if (w > 0) {
+        score += w;
+        matchedActionCount++;
+      }
+    }
+
+    // Determine if this staff card should appear:
+    // - If user typed specific topic keywords (e.g., "pa system" in "nak pinjam pa system"),
+    //   require AT LEAST ONE topic keyword to match so unrelated "pinjaman" cards don't pollute results!
+    // - If user ONLY typed generic action words (e.g., just "pinjam" or "tempah"), match on action words!
+    const isMatch = topicTokens.length > 0
+      ? matchedTopicCount > 0
+      : (matchedActionCount > 0 || score > 0);
+
+    if (isMatch) {
+      // Extra synergy bonus when multiple topic keywords match together (e.g. "pa" + "system")
+      score += matchedTopicCount * 20;
+      scoredMatches.push({ item, score, originalIndex });
+    }
   });
 
-  renderStaffList(matches, `Hasil Carian JHEP Assist: "${query}"`);
+  // Sort by highest relevance score first, preserving original order on ties
+  scoredMatches.sort((a, b) => b.score - a.score || a.originalIndex - b.originalIndex);
+
+  renderStaffList(
+    scoredMatches.map(m => m.item),
+    `Hasil Carian JHEP Assist: "${query}"`
+  );
 }
 
 /**
