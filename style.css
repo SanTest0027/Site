@@ -2449,57 +2449,31 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   Fixed TOP-CENTER Horizontal Left/Right Mode Switcher
-   (100% Immune to Google Sites Mobile Bottom Clipping — Outline NEVER Moves!)
+   Clean Inline Mode Switcher (No Floating Bar Colliding With Google Sites!)
    ========================================================================== */
-.floating-mode-dock {
-  position: fixed;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 650;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 244px;
-  max-width: calc(100vw - 24px);
-  background: var(--charcoal-900);
-  border: 2px solid var(--jhep-gold);
-  border-radius: var(--radius-full);
-  padding: 3px;
-  box-shadow: 0 8px 24px rgba(24, 28, 34, 0.34);
-}
-
-/* Smoothly sliding gold pill indicator (glides Left <-> Right inside stationary outline) */
-.dock-active-pill {
-  position: absolute;
-  top: 3px;
-  bottom: 3px;
-  left: 3px;
-  width: calc(50% - 3px);
-  border-radius: var(--radius-full);
-  background: linear-gradient(135deg, #fbbf24 0%, #e5a00d 100%);
-  box-shadow: 0 3px 10px rgba(229, 160, 13, 0.36);
-  transform: translateX(0);
-  transition: transform 0.28s cubic-bezier(0.34, 1.22, 0.64, 1);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Slide the gold pill smoothly to the right (Tanya AI) without moving the outer pill */
-.floating-mode-dock.in-chat-mode .dock-active-pill {
-  transform: translateX(100%);
-}
-
-.dock-mode-btn {
+.inline-mode-bar {
   position: relative;
-  z-index: 1;
+  z-index: 3;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  width: 276px;
+  max-width: 100%;
+  background: rgba(15, 20, 28, 0.85);
+  border: 1.5px solid var(--jhep-gold);
+  border-radius: var(--radius-full);
+  padding: 4px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+}
+
+.inline-mode-opt {
   background: transparent;
-  color: #d1d5db;
+  color: #e5e7eb;
   border: none;
   font-family: var(--font-family);
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   font-weight: 800;
-  padding: 7px 12px;
+  padding: 8px 14px;
   border-radius: var(--radius-full);
   cursor: pointer;
   display: inline-flex;
@@ -2507,37 +2481,23 @@ body::-webkit-scrollbar,
   justify-content: center;
   gap: 6px;
   white-space: nowrap;
-  transition: color 0.22s ease;
+  transition: var(--transition);
 }
 
-.dock-mode-btn:hover {
+.inline-mode-opt:hover {
   color: #fde68a;
 }
 
-.dock-mode-btn.active {
+.inline-mode-opt.active {
+  background: linear-gradient(135deg, #fbbf24 0%, #e5a00d 100%);
   color: var(--charcoal-900);
-}
-
-.dock-mode-btn.active:hover {
-  color: var(--charcoal-900);
-}
-
-/* Top clearance so the centered top toggle never overlaps hero text or chatbot topbar */
-.welcome-hero {
-  padding-top: 66px;
-}
-
-.jhep-ai-topbar {
-  padding-top: 58px;
-}
-
-/* Hide redundant Directory button in chatbot topbar since top-center toggle is always right there */
-.ai-topbar-dir-btn {
-  display: none;
+  box-shadow: 0 3px 10px rgba(229, 160, 13, 0.35);
 }
 
 /* Google Sites iframe embed fix:
-   Keep internal scroll smooth WITHOUT blocking scroll chaining (so Google Sites header never gets stuck!) */
+   Fit the entire chatbot (slim topbar + scrollable messages + pinned bottom input)
+   cleanly inside the visible screen beneath Google Sites' ~58px header so
+   scrolling chat messages up/down NEVER hides the text input box! */
 html:has(body.is-embedded),
 body.is-embedded {
   height: 100%;
@@ -2560,24 +2520,13 @@ body.is-embedded .chatbot-fullscreen-wrapper {
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  height: 100%;
+  bottom: auto;
+  height: calc(100dvh - 58px);
   overflow: hidden;
 }
 
-/* Keep the chat input & FAQ sidebar footer cleanly in the visible area above Google Sites' ~60px bottom iframe overflow */
-body.is-embedded .jhep-ai-composer-wrap {
-  padding-bottom: calc(68px + env(safe-area-inset-bottom));
-  transition: padding-bottom 0.15s ease;
-}
-
-/* Collapse extra bottom padding while keyboard is open so input sits flush above keyboard (ZERO white gap!) */
-body.is-embedded .jhep-ai-composer-wrap:focus-within {
-  padding-bottom: 8px;
-}
-
 body.is-embedded .ai-sidebar-footer {
-  padding-bottom: calc(70px + env(safe-area-inset-bottom));
+  padding-bottom: 14px;
 }
 
 /* ==========================================================================
@@ -2634,9 +2583,15 @@ body.is-embedded .ai-sidebar-footer {
     padding: 0 14px;
   }
 
-  /* Compact Hero for Mobile (with clearance for top-center mode pill) */
+  /* Compact Hero for Mobile with clean inline mode bar */
   .welcome-hero {
-    padding: 64px 0 34px 0;
+    padding: 20px 0 32px 0;
+  }
+
+  .inline-mode-bar {
+    display: grid;
+    margin: 0 auto 16px auto;
+    width: 260px;
   }
 
   .hero-big-title {
@@ -2786,19 +2741,19 @@ body.is-embedded .ai-sidebar-footer {
     padding: 4px 8px;
   }
 
-  /* Mobile Chatbot adjustments */
+  /* Mobile Chatbot adjustments: slim topbar, pinned bottom input, zero floating clutter */
   .jhep-ai-topbar {
-    padding: 54px 12px 8px 12px;
+    padding: 8px 10px;
   }
 
-  /* Keep compact icon-only Directory button visible as a safety net while mobile keyboard is open */
+  .ai-brand-group strong {
+    font-size: 0.88rem;
+  }
+
   .ai-topbar-dir-btn {
     display: inline-flex;
-    padding: 6px 8px;
-  }
-
-  .ai-topbar-dir-btn span {
-    display: none;
+    padding: 6px 10px;
+    font-size: 0.72rem;
   }
 
   .jhep-ai-scroll {
@@ -2806,7 +2761,7 @@ body.is-embedded .ai-sidebar-footer {
   }
 
   .ai-hero-greeting h3 {
-    font-size: 1.25rem;
+    font-size: 1.22rem;
   }
 
   .ai-turn-user {
@@ -2817,35 +2772,12 @@ body.is-embedded .ai-sidebar-footer {
     padding: 8px 12px calc(8px + env(safe-area-inset-bottom)) 12px;
   }
 
-  body.is-embedded .jhep-ai-composer-wrap {
-    padding-bottom: calc(70px + env(safe-area-inset-bottom));
-  }
-
-  body.is-embedded .jhep-ai-composer-wrap:focus-within {
-    padding-bottom: 8px;
-  }
-
   .jhep-ai-caption {
     display: none;
   }
 
-  .floating-mode-dock {
-    top: 8px;
-    bottom: auto;
-    width: 232px;
-    padding: 3px;
-  }
-
-  .dock-active-pill {
-    top: 3px;
-    bottom: 3px;
-    left: 3px;
-    width: calc(50% - 3px);
-  }
-
-  .dock-mode-btn {
-    padding: 6px 10px;
-    font-size: 0.74rem;
+  body.is-embedded .chatbot-fullscreen-wrapper {
+    height: calc(100dvh - 60px);
   }
 
   .welcome-modal-card {

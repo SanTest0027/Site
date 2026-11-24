@@ -21,10 +21,22 @@
        ========================================================================= -->
   <div id="view-directory-wrapper">
 
-    <!-- 1. CLEAN COMPACT WELCOME HERO BANNER (No bulky pills or redundant buttons) -->
+    <!-- 1. CLEAN COMPACT WELCOME HERO BANNER WITH INLINE MODE SWITCHER -->
     <section class="welcome-hero">
       <div class="hero-bg-photo"></div>
       <div class="hero-bg-overlay"></div>
+      <div class="container">
+        <div class="inline-mode-bar" role="tablist" aria-label="Pilih paparan Direktori atau AI Chatbot">
+          <button type="button" class="inline-mode-opt active" onclick="switchHubMode('directory', false)">
+            <i data-lucide="users" class="icon-xs"></i>
+            <span>Direktori PIC</span>
+          </button>
+          <button type="button" class="inline-mode-opt" onclick="switchHubMode('chatbot', false)">
+            <i data-lucide="bot" class="icon-xs"></i>
+            <span>TanyaJHEP AI</span>
+          </button>
+        </div>
+      </div>
       <div class="container hero-grid">
         <div class="hero-text-col">
           <h1 class="hero-big-title">
@@ -34,7 +46,7 @@
           <div class="gold-accent-bar"></div>
 
           <p class="hero-lead">
-            Semak pegawai bertanggungjawab (PIC), lokasi kaunter & emel rasmi di <b>Jabatan Hal Ehwal Pelajar & Alumni (JHEP) UniMAP</b> — atau klik butang <b>Tanya AI</b> di kanan bawah untuk bersembang dengan pembantu pintar HEPA.
+            Semak pegawai bertanggungjawab (PIC), lokasi kaunter & emel rasmi di <b>Jabatan Hal Ehwal Pelajar & Alumni (JHEP) UniMAP</b> — atau pilih tab <b>TanyaJHEP AI</b> di atas untuk bersembang dengan pembantu pintar HEPA.
           </p>
 
           <div class="hero-meta-badges">
@@ -389,7 +401,7 @@
             </div>
             <button type="button" class="ai-topbar-dir-btn" onclick="switchHubMode('directory', true)" title="Kembali ke Direktori PIC">
               <i data-lucide="users" class="icon-xs"></i>
-              <span>Direktori PIC</span>
+              <span>Direktori</span>
             </button>
           </div>
         </div>
@@ -463,19 +475,6 @@
         </button>
       </div>
     </div>
-  </div>
-
-  <!-- Always-Accessible Vertical Up/Down Mode Switcher at BOTTOM RIGHT (Sliding Gold Pill) -->
-  <div id="floating-mode-dock" class="floating-mode-dock" role="group" aria-label="Tukar paparan Direktori atau AI Chatbot">
-    <span class="dock-active-pill" aria-hidden="true"></span>
-    <button type="button" id="dockBtnDirectory" class="dock-mode-btn active" onclick="switchHubMode('directory', false)" title="Direktori Pegawai (PIC)">
-      <i data-lucide="users" class="icon-xs"></i>
-      <span>Direktori</span>
-    </button>
-    <button type="button" id="dockBtnChatbot" class="dock-mode-btn" onclick="switchHubMode('chatbot', false)" title="TanyaJHEP AI Chatbot">
-      <i data-lucide="bot" class="icon-xs"></i>
-      <span>Tanya AI</span>
-    </button>
   </div>
 
   <!-- Toast Notification for Copy Email -->
