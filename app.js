@@ -1054,13 +1054,22 @@ function initAiChatbot() {
   setAiLanguage("ms");
 
   const form = document.getElementById("aiComposerForm");
+  const input = document.getElementById("aiUserInput");
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      const input = document.getElementById("aiUserInput");
       if (!input || !input.value.trim()) return;
       askAiChatbot(input.value);
       input.value = "";
+      // On mobile, close keyboard after sending so the answer & top pill immediately snap back into full view
+      if (window.innerWidth <= 768) {
+        input.blur();
+      }
+    });
+  }
+  if (input) {
+    input.addEventListener("blur", () => {
+      setTimeout(() => window.scrollTo(0, 0), 80);
     });
   }
 }

@@ -2573,6 +2573,12 @@ body.is-embedded .chatbot-fullscreen-wrapper {
 /* Keep the chat input & FAQ sidebar footer cleanly in the visible area above Google Sites' ~60px bottom iframe overflow */
 body.is-embedded .jhep-ai-composer-wrap {
   padding-bottom: calc(68px + env(safe-area-inset-bottom));
+  transition: padding-bottom 0.15s ease;
+}
+
+/* Collapse extra bottom padding while keyboard is open so input sits flush above keyboard (ZERO white gap!) */
+body.is-embedded .jhep-ai-composer-wrap:focus-within {
+  padding-bottom: 8px;
 }
 
 body.is-embedded .ai-sidebar-footer {
@@ -2808,6 +2814,10 @@ body.is-embedded .ai-sidebar-footer {
 
   body.is-embedded .jhep-ai-composer-wrap {
     padding-bottom: calc(70px + env(safe-area-inset-bottom));
+  }
+
+  body.is-embedded .jhep-ai-composer-wrap:focus-within {
+    padding-bottom: 8px;
   }
 
   .jhep-ai-caption {
