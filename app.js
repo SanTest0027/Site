@@ -1050,11 +1050,6 @@ function renderMarkdownClean(md) {
 }
 
 function resetEmbeddedOuterScroll() {
-  if (!document.body || !document.body.classList.contains("is-embedded")) return;
-  const topAnchor = document.getElementById("iframe-top-anchor");
-  if (topAnchor) {
-    topAnchor.scrollIntoView({ behavior: "auto", block: "start" });
-  }
   window.scrollTo(0, 0);
 }
 

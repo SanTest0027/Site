@@ -1789,7 +1789,6 @@ body {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
-  overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
   padding: 24px 20px;
 }
@@ -2538,13 +2537,11 @@ body::-webkit-scrollbar,
 }
 
 /* Google Sites iframe embed fix:
-   Lock outer document so ONLY #view-directory-wrapper & .jhep-ai-scroll scroll internally!
-   This keeps the top-center [Direktori | Tanya AI] toggle 100% locked in BOTH modes! */
+   Keep internal scroll smooth WITHOUT blocking scroll chaining (so Google Sites header never gets stuck!) */
 html:has(body.is-embedded),
 body.is-embedded {
   height: 100%;
   overflow: hidden !important;
-  overscroll-behavior: none;
 }
 
 body.is-embedded #view-directory-wrapper {
@@ -2555,7 +2552,6 @@ body.is-embedded #view-directory-wrapper {
   bottom: 0;
   height: 100%;
   overflow-y: auto;
-  overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -2567,7 +2563,6 @@ body.is-embedded .chatbot-fullscreen-wrapper {
   bottom: 0;
   height: 100%;
   overflow: hidden;
-  overscroll-behavior: contain;
 }
 
 /* Keep the chat input & FAQ sidebar footer cleanly in the visible area above Google Sites' ~60px bottom iframe overflow */
