@@ -585,7 +585,24 @@ function askQuestion(keyword, btnEl) {
 
   const stream = document.querySelector(".staff-directory-stream");
   if (stream) {
-    stream.scrollIntoView({ behavior: "smooth", block: "start" });
+    scrollDirectoryToElement(stream, 68);
+  }
+}
+
+/**
+ * Scroll cleanly to an element inside #view-directory-wrapper without ever triggering
+ * outer Google Sites iframe scrolling (which would hide the top pill behind Google Sites' header).
+ */
+function scrollDirectoryToElement(el, offset = 68) {
+  if (!el) return;
+  const dirWrap = document.getElementById("view-directory-wrapper");
+  if (document.body.classList.contains("is-embedded") && dirWrap) {
+    const topPos = Math.max(0, el.offsetTop - offset);
+    dirWrap.scrollTo({ top: topPos, behavior: "smooth" });
+  } else {
+    const rect = el.getBoundingClientRect();
+    const topPos = Math.max(0, window.scrollY + rect.top - offset);
+    window.scrollTo({ top: topPos, behavior: "smooth" });
   }
 }
 
@@ -979,7 +996,7 @@ function escalateToPicDirectory(picFilterQuery) {
 
   const dirSec = document.getElementById("staff-directory-section");
   if (dirSec) {
-    dirSec.scrollIntoView({ behavior: "smooth", block: "start" });
+    setTimeout(() => scrollDirectoryToElement(dirSec, 68), 60);
   }
 
   // Highlight matched PIC cards with a subtle golden spotlight pulse

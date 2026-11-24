@@ -1496,7 +1496,7 @@ body {
   inset: 0;
   background: rgba(15, 23, 42, 0.55);
   backdrop-filter: blur(3px);
-  z-index: 510;
+  z-index: 690;
 }
 
 .ai-sidebar-backdrop.open {
@@ -2570,9 +2570,13 @@ body.is-embedded .chatbot-fullscreen-wrapper {
   overscroll-behavior: contain;
 }
 
-/* Keep the chat input cleanly in the visible area above Google Sites' ~60px bottom iframe overflow */
+/* Keep the chat input & FAQ sidebar footer cleanly in the visible area above Google Sites' ~60px bottom iframe overflow */
 body.is-embedded .jhep-ai-composer-wrap {
   padding-bottom: calc(68px + env(safe-area-inset-bottom));
+}
+
+body.is-embedded .ai-sidebar-footer {
+  padding-bottom: calc(70px + env(safe-area-inset-bottom));
 }
 
 /* ==========================================================================
@@ -2583,7 +2587,7 @@ body.is-embedded .jhep-ai-composer-wrap {
     grid-template-columns: 1fr;
   }
 
-  /* Slide-over FAQ drawer on mobile — ZERO clutter on top of chat! */
+  /* Slide-over FAQ drawer on mobile — sits cleanly ABOVE the top mode pill! */
   .jhep-ai-sidebar {
     position: fixed;
     top: 0;
@@ -2591,7 +2595,7 @@ body.is-embedded .jhep-ai-composer-wrap {
     bottom: 0;
     width: 285px;
     max-width: 84vw;
-    z-index: 520;
+    z-index: 700;
     transform: translateX(-105%);
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 12px 0 32px rgba(0, 0, 0, 0.35);
