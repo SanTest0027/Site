@@ -54,12 +54,13 @@ const STAFF_DATA = [
     photo: "cropped-images/staf-nordiana.png",
     location: "Aras 1, Pejabat JHEP",
     email: "nordiana@unimap.edu.my",
-    helpsWith: ["Temu Janji Pengarah", "Status Kelulusan Surat"],
+    helpsWith: ["Temu Janji Pengarah", "Status Kelulusan Surat", "Tempahan Bilik Mesyuarat"],
     fullUrusan: [
       "Semakan Jadual Temu Janji Pengarah — Semakan jadual dan pertanyaan berkaitan urusan temu janji bersama Pengarah JHEP.",
-      "Semakan Status Kelulusan Surat — Semakan status kelulusan permohonan surat yang memerlukan kelulusan Pengarah JHEP."
+      "Semakan Status Kelulusan Surat — Semakan status kelulusan permohonan surat yang memerlukan kelulusan Pengarah JHEP.",
+      "Tempahan Bilik Mesyuarat — Pengurusan dan semakan kekosongan bagi tempahan penggunaan Bilik Mesyuarat JHEP."
     ],
-    keywords: "setiausaha pejabat temu janji pengarah jadual kelulusan surat nordiana pentadbiran"
+    keywords: "setiausaha pejabat temu janji pengarah jadual kelulusan surat tempahan bilik mesyuarat ruang perbincangan nordiana pentadbiran"
   },
 
   // 2. Unit Kebajikan (PDF Pages 1-3 & 18.png)
@@ -277,34 +278,68 @@ const STAFF_DATA = [
     keywords: "kepimpinan bakat mpp majlis perwakilan pelajar badan kepimpinan aktiviti kelab persatuan inovasi rekacipta debat merit signature roziana"
   },
 
-  // 8. Unit Pentadbiran & Kewangan (PDF Page 9 & 3.png)
+  // 8. Unit Pentadbiran & Kewangan (PDF Page 9 & Update Set)
   {
     name: "Azfardon Zulkamal Azmi",
     role: "Ketua Unit Pentadbiran & Kewangan",
     unit: "Unit Pentadbiran & Kewangan",
-    tag: "Pentadbiran & Cenderahati",
+    tag: "Pentadbiran, Cenderahati & Kemudahan",
     photo: "cropped-images/staf-azfardon.png",
     location: "Aras 1, Pejabat Am JHEP",
     email: "azfardon@unimap.edu.my",
-    helpsWith: ["Pengambilan Cenderahati", "Pentadbiran & Kewangan JHEP"],
-    fullUrusan: [
-      "Pengambilan Cenderahati"
+    helpsWith: [
+      "Cenderahati & Pakaian Rasmi (Jaket/Baju)",
+      "Tempahan Bilik Gerakan JHEP",
+      "Peminjaman Peralatan JHEP (Selain PA System)"
     ],
-    keywords: "pentadbiran kewangan pengambilan cenderahati azfardon"
+    fullUrusan: [
+      "Pengambilan Cenderahati Pelajar (Pengambilan Pakaian Rasmi Pelajar Selepas Hari Pendaftaran) — Pengurusan dan penyelarasan pengambilan pakaian rasmi pelajar yang belum diterima semasa hari pendaftaran termasuk jaket rasmi pelajar, baju korporat dan baju T-shirt berkolar. Melibatkan semakan rekod penerimaan, semakan ketersediaan stok dan saiz serta penyelarasan pengambilan di Pejabat JHEP.",
+      "Tempahan Ruang / Bilik (Tempahan Penggunaan Bilik Gerakan JHEP) — Pengurusan dan penyelarasan tempahan penggunaan Bilik Gerakan JHEP bagi tujuan mesyuarat, perbincangan, taklimat, bengkel dan aktiviti berkaitan. Melibatkan semakan kekosongan bilik, kelulusan penggunaan serta penyelarasan kemudahan yang disediakan.",
+      "Tempahan / Peminjaman Peralatan (Selain PA System) — Pengurusan permohonan dan penyelarasan peminjaman peralatan milik JHEP selain PA System bagi kegunaan program dan aktiviti pelajar. Melibatkan semakan ketersediaan peralatan, rekod pinjaman, penyerahan dan pemulangan peralatan."
+    ],
+    keywords: "pentadbiran kewangan cenderahati pakaian rasmi pelajar jaket rasmi jaket pelajar baju korporat baju t-shirt berkolar tshirt pengambilan baju tuntutan pakaian pakaian belum diterima saiz baju pendaftaran pelajar bilik gerakan tempahan bilik penggunaan bilik mesyuarat perbincangan taklimat bengkel ruang mesyuarat peminjaman peralatan pinjaman barang peralatan jhep tempahan peralatan projektor skrin meja kerusi peralatan program inventori jhep azfardon"
   },
   {
     name: "Norhafizah Binti Ismail",
     role: "Pembantu Tadbir (Cenderahati)",
     unit: "Unit Pentadbiran & Kewangan",
-    tag: "Unit Pentadbiran (Cenderahati)",
+    tag: "Cenderahati, Bilik Gerakan & Peralatan",
     photo: "cropped-images/staf-norhafizah.png",
     location: "Stor Cenderahati / Aras 1, Pejabat JHEP",
     email: "norhafizah@unimap.edu.my",
-    helpsWith: ["Pengambilan Cenderahati", "Stor Cenderahati JHEP"],
-    fullUrusan: [
-      "Pengambilan Cenderahati"
+    helpsWith: [
+      "Cenderahati & Pakaian Rasmi (Jaket/Baju)",
+      "Tempahan Bilik Gerakan JHEP",
+      "Peminjaman Peralatan JHEP (Selain PA System)"
     ],
-    keywords: "pentadbiran pengambilan cenderahati stor hadiah norhafizah"
+    fullUrusan: [
+      "Pengambilan Cenderahati Pelajar (Pengambilan Pakaian Rasmi Pelajar Selepas Hari Pendaftaran) — Pengurusan dan penyelarasan pengambilan pakaian rasmi pelajar yang belum diterima semasa hari pendaftaran termasuk jaket rasmi pelajar, baju korporat dan baju T-shirt berkolar. Melibatkan semakan rekod penerimaan, semakan ketersediaan stok dan saiz serta penyelarasan pengambilan di Pejabat JHEP.",
+      "Tempahan Ruang / Bilik (Tempahan Penggunaan Bilik Gerakan JHEP) — Pengurusan dan penyelarasan tempahan penggunaan Bilik Gerakan JHEP bagi tujuan mesyuarat, perbincangan, taklimat, bengkel dan aktiviti berkaitan. Melibatkan semakan kekosongan bilik, kelulusan penggunaan serta penyelarasan kemudahan yang disediakan.",
+      "Tempahan / Peminjaman Peralatan (Selain PA System) — Pengurusan permohonan dan penyelarasan peminjaman peralatan milik JHEP selain PA System bagi kegunaan program dan aktiviti pelajar. Melibatkan semakan ketersediaan peralatan, rekod pinjaman, penyerahan dan pemulangan peralatan."
+    ],
+    keywords: "pentadbiran cenderahati stor pakaian rasmi pelajar jaket rasmi jaket pelajar baju korporat baju t-shirt berkolar tshirt pengambilan baju tuntutan pakaian pakaian belum diterima saiz baju pendaftaran pelajar bilik gerakan tempahan bilik penggunaan bilik mesyuarat perbincangan taklimat bengkel ruang mesyuarat peminjaman peralatan pinjaman barang peralatan jhep tempahan peralatan projektor skrin meja kerusi peralatan program inventori jhep norhafizah"
+  },
+  {
+    name: "Mohd Khairul Effendi Bin Che Wan",
+    role: "Penolong Pegawai Tadbir (Pegawai Kewangan)",
+    unit: "Unit Pentadbiran & Kewangan",
+    tag: "Pegawai Kewangan • Protokol & PA System",
+    photo: "cropped-images/staf-khairul.png",
+    location: "Aras Bawah, Pejabat JHEP",
+    email: "khairul.effendi@unimap.edu.my",
+    helpsWith: [
+      "Pegawai Kewangan",
+      "Protokol Program (VIP/VVIP)",
+      "Peminjaman PA System / Portable",
+      "Semakan Grafik (Banner/Backdrop)"
+    ],
+    fullUrusan: [
+      "Protokol Program (Semakan dan Penasihatan Protokol Penganjuran Program / Aktiviti Pelajar Peringkat Universiti) — Semakan susunan protokol, atur cara majlis, jemputan VIP/VVIP, susunan tempat duduk dan tatacara majlis.",
+      "Permohonan Peminjaman PA System / Portable — Pengurusan permohonan, semakan ketersediaan dan penyelarasan peminjaman peralatan audio (PA System, Portable, speaker, mikrofon, pembesar suara).",
+      "Semakan Grafik (Semakan dan Penasihatan Grafik dan Reka Bentuk Banner / Backdrop Program) — Semakan reka bentuk, penggunaan logo rasmi, warna korporat, susunan logo dan pematuhan protokol identiti universiti.",
+      "Hal Ehwal Kewangan — Pengurusan dan semakan hal ehwal kewangan berkaitan di bawah Unit Pentadbiran & Kewangan JHEP."
+    ],
+    keywords: "pegawai kewangan penolong pegawai tadbir protokol program vip vvip atur cara susunan majlis jemputan rasmi tempat duduk tatacara majlis permohonan peminjaman pa system portable speaker mikrofon pembesar suara audio semakan grafik reka bentuk banner backdrop bunting logo warna korporat identiti korporat universiti tuntutan kewangan khairul effendi che wan"
   },
   {
     name: "Nor Faezah Binti Mirdukhim @ Mustapa",
@@ -325,8 +360,81 @@ const STAFF_DATA = [
 // Initialize on load
 document.addEventListener("DOMContentLoaded", () => {
   renderStaffList(STAFF_DATA);
+  updateLiveOperatingStatus();
+  setInterval(updateLiveOperatingStatus, 60000);
   lucide.createIcons();
 });
+
+/**
+ * Live Malaysia-time (Asia/Kuala_Lumpur) Waktu Operasi checker per WAKTU OPERASI JHEP.pdf
+ * Isnin - Jumaat: 8.30 Pagi - 4.30 Petang
+ * Rehat Isnin - Khamis: 1.00 Petang - 2.00 Petang
+ * Rehat Jumaat: 12.15 Petang - 2.45 Petang
+ * Cuti: Sabtu / Ahad
+ */
+function updateLiveOperatingStatus() {
+  try {
+    const nowMY = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Kuala_Lumpur" }));
+    const day = nowMY.getDay(); // 0 = Sun, 1 = Mon ... 5 = Fri, 6 = Sat
+    const mins = nowMY.getHours() * 60 + nowMY.getMinutes();
+
+    const dot = document.getElementById("live-status-dot");
+    const heroText = document.getElementById("live-status-text");
+    const badge = document.getElementById("operasi-live-badge");
+
+    let state = "closed"; // 'open' | 'break' | 'closed'
+    let heroLabel = "Kaunter Ditutup • Buka Isnin–Jumaat (8.30 pg – 4.30 ptg)";
+    let badgeLabel = "🔴 Kaunter Ditutup Sekarang (Buka Isnin – Jumaat, 8.30 pg – 4.30 ptg)";
+
+    if (day >= 1 && day <= 4) {
+      // Monday - Thursday
+      if (mins >= 510 && mins < 780) {
+        state = "open";
+        heroLabel = "Kaunter Dibuka Sekarang • Rehat 1.00 ptg";
+        badgeLabel = "🟢 Kaunter Sedang Dibuka (8.30 Pagi – 4.30 Petang)";
+      } else if (mins >= 780 && mins < 840) {
+        state = "break";
+        heroLabel = "Waktu Rehat (1.00 – 2.00 ptg) • Buka semula 2.00 ptg";
+        badgeLabel = "🟡 Waktu Rehat Kaunter (1.00 Petang – 2.00 Petang)";
+      } else if (mins >= 840 && mins < 990) {
+        state = "open";
+        heroLabel = "Kaunter Dibuka Sekarang • Tutup 4.30 ptg";
+        badgeLabel = "🟢 Kaunter Sedang Dibuka (Tutup 4.30 Petang)";
+      }
+    } else if (day === 5) {
+      // Friday
+      if (mins >= 510 && mins < 735) {
+        state = "open";
+        heroLabel = "Kaunter Dibuka Sekarang • Rehat Jumaat 12.15 tgh";
+        badgeLabel = "🟢 Kaunter Sedang Dibuka (Rehat Jumaat 12.15 tgh)";
+      } else if (mins >= 735 && mins < 885) {
+        state = "break";
+        heroLabel = "Waktu Rehat Jumaat (12.15 – 2.45 ptg)";
+        badgeLabel = "🟡 Waktu Rehat Jumaat (12.15 Petang – 2.45 Petang)";
+      } else if (mins >= 885 && mins < 990) {
+        state = "open";
+        heroLabel = "Kaunter Dibuka Sekarang • Tutup 4.30 ptg";
+        badgeLabel = "🟢 Kaunter Sedang Dibuka (Tutup 4.30 Petang)";
+      }
+    } else {
+      heroLabel = "Cuti Hujung Minggu (Sabtu / Ahad)";
+      badgeLabel = "🔴 Cuti Hujung Minggu (Sabtu / Ahad)";
+    }
+
+    if (dot) {
+      dot.className = "status-glow" + (state === "open" ? "" : " " + state);
+    }
+    if (heroText) {
+      heroText.textContent = heroLabel;
+    }
+    if (badge) {
+      badge.textContent = badgeLabel;
+      badge.className = "operasi-live-badge is-" + state;
+    }
+  } catch (e) {
+    // Fallback static label if timezone parsing not supported
+  }
+}
 
 /**
  * Render big portrait staff cards with location, official email, copy button & expandable urusan drawer

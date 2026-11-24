@@ -25,10 +25,10 @@
             <i data-lucide="sparkles" class="icon-xs"></i>
             <span>JABATAN HAL EHWAL PELAJAR & ALUMNI (JHEP)</span>
           </span>
-          <span class="hours-pill">
-            <span class="status-glow"></span>
-            <span>Isnin – Jumaat (8.30 pg – 4.30 ptg)</span>
-          </span>
+          <a href="#waktu-operasi" class="hours-pill" id="live-status-pill" title="Klik untuk lihat jadual penuh Waktu Operasi JHEP">
+            <span class="status-glow" id="live-status-dot"></span>
+            <span id="live-status-text">Isnin – Jumaat (8.30 pg – 4.30 ptg)</span>
+          </a>
         </div>
 
         <h1 class="hero-big-title">
@@ -38,7 +38,7 @@
         <div class="gold-accent-bar"></div>
 
         <p class="hero-lead">
-          Selamat datang ke <b>JHEP Assist</b>! Tak pasti nak jumpa siapa di pejabat JHEP? Cari isu atau urusan anda di bawah dan ketahui terus pegawai bertugas, aras lokasi, serta emel rasmi mereka.
+          Selamat datang ke <b>JHEP Assist</b>! Sila semak urusan anda terlebih dahulu sebelum berurusan di kaunter JHEP bagi melancarkan perkhidmatan bersama pegawai yang bertanggungjawab.
         </p>
 
         <div class="hero-meta-badges">
@@ -57,6 +57,10 @@
             <i data-lucide="zap" class="icon-sm"></i>
             <span>Mula Carian Pantas</span>
           </a>
+          <a href="#waktu-operasi" class="btn-hero-glass">
+            <i data-lucide="clock" class="icon-sm"></i>
+            <span>Waktu Operasi</span>
+          </a>
           <a href="#top-leadership" class="btn-hero-glass">
             <i data-lucide="crown" class="icon-sm"></i>
             <span>Pengurusan Tertinggi</span>
@@ -66,7 +70,7 @@
 
       <div class="hero-visual-col">
         <div class="hero-visual-frame">
-          <img src="images/hero-campus.png" alt="Mahasiswa UniMAP" class="hero-main-img">
+          <img src="cropped-images/hero-campus.png" alt="Mahasiswa UniMAP" class="hero-main-img">
           <div class="floating-motto-card">
             <div class="motto-dots">
               <span class="dot charcoal"></span>
@@ -83,6 +87,65 @@
     </div>
   </section>
 
+  <!-- 1B. WAKTU OPERASI & PANDUAN RINGKAS KAUNTER JHEP -->
+  <section class="waktu-operasi-section" id="waktu-operasi">
+    <div class="container">
+      <div class="operasi-card-shell">
+        <div class="operasi-header-row">
+          <div class="operasi-title-left">
+            <span class="operasi-icon-box"><i data-lucide="clock" class="icon-sm"></i></span>
+            <div>
+              <h3>Waktu Operasi Kaunter JHEP</h3>
+              <p>Pastikan anda hadir mengikut waktu operasi kaunter Jabatan Hal Ehwal Pelajar</p>
+            </div>
+          </div>
+          <span class="operasi-live-badge" id="operasi-live-badge">Isnin – Jumaat: 8.30 Pagi – 4.30 Petang</span>
+        </div>
+
+        <div class="operasi-grid">
+          <div class="operasi-item highlight-main">
+            <span class="op-label"><i data-lucide="calendar-check" class="icon-xs"></i> Waktu Beroperasi</span>
+            <strong>Isnin hingga Jumaat</strong>
+            <span class="op-time gold-text">8.30 Pagi – 4.30 Petang</span>
+          </div>
+
+          <div class="operasi-item">
+            <span class="op-label"><i data-lucide="coffee" class="icon-xs"></i> Waktu Rehat (Isnin – Khamis)</span>
+            <strong>Isnin – Khamis</strong>
+            <span class="op-time">1.00 Petang – 2.00 Petang</span>
+          </div>
+
+          <div class="operasi-item">
+            <span class="op-label"><i data-lucide="coffee" class="icon-xs"></i> Waktu Rehat (Jumaat)</span>
+            <strong>Hari Jumaat</strong>
+            <span class="op-time">12.15 Petang – 2.45 Petang</span>
+          </div>
+
+          <div class="operasi-item closed-item">
+            <span class="op-label"><i data-lucide="calendar-x" class="icon-xs"></i> Hari Cuti</span>
+            <strong>Sabtu / Ahad</strong>
+            <span class="op-time closed-text">Tutup & Cuti Umum</span>
+          </div>
+        </div>
+
+        <div class="kaunter-steps-bar">
+          <div class="step-pill">
+            <span class="step-num">1</span>
+            <span><b>SEMAK</b> jenis urusan (cth: PTPTN, PILLARS, baju/cenderahati, PA System, bilik, zakat)</span>
+          </div>
+          <div class="step-pill">
+            <span class="step-num">2</span>
+            <span><b>KENAL PASTI</b> pegawai yang bertanggungjawab bagi urusan tersebut</span>
+          </div>
+          <div class="step-pill">
+            <span class="step-num">3</span>
+            <span><b>HADIR</b> ke kaunter / aras JHEP mengikut pegawai yang dipaparkan</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 2. CARIAN PANTAS PELAJAR & STAF ("Ada urusan apa kat JHEP hari ni?") -->
   <section class="vibe-finder-section" id="urusan-finder">
     <div class="container finder-container">
@@ -90,7 +153,7 @@
       <div class="finder-header">
         <span class="finder-eyebrow"><i data-lucide="compass" class="icon-xs"></i> CARIAN PANTAS PELAJAR & STAF</span>
         <h2>Ada urusan apa kat JHEP hari ni? 🤔</h2>
-        <p>Klik topik urusan di bawah atau taip sahaja soalan anda — <b>JHEP Assist</b> tunjukkan pegawai yang tepat!</p>
+        <p>Klik topik urusan di bawah atau taip sahaja kata kunci — <b>JHEP Assist</b> tunjukkan pegawai yang tepat!</p>
       </div>
 
       <!-- Main Search Box -->
@@ -101,7 +164,7 @@
         <input 
           type="text" 
           id="vibe-search-input" 
-          placeholder="Tanya JHEP Assist (cth: PTPTN, PILLARS, zakat, foodbank, bas, van, cenderahati, temu janji pengarah)..." 
+          placeholder="Taip urusan / kata kunci (cth: PTPTN, PILLARS, baju korporat, jaket, PA system, banner, bilik gerakan, zakat)..." 
           autocomplete="off"
           oninput="handleQuickSearch(this.value)"
         >
@@ -112,15 +175,16 @@
 
       <!-- Fun Short Question Chips -->
       <div class="short-questions-wrap">
-        <button class="question-chip active" onclick="askQuestion('', this)">✨ Semua Pegawai (17)</button>
-        <button class="question-chip" onclick="askQuestion('Temu Janji', this)">📅 Temu Janji & Surat Pengarah</button>
+        <button class="question-chip active" onclick="askQuestion('', this)">✨ Semua Pegawai (18)</button>
+        <button class="question-chip" onclick="askQuestion('Temu Janji', this)">📅 Temu Janji & Bilik Mesyuarat</button>
         <button class="question-chip" onclick="askQuestion('Kebajikan', this)">💝 Kebajikan, Zakat & Hospital (GL)</button>
         <button class="question-chip" onclick="askQuestion('PTPTN', this)">🎓 PTPTN & Pembiayaan</button>
         <button class="question-chip" onclick="askQuestion('PILLARS', this)">⭐ Masalah PILLARS & Sukarelawan</button>
         <button class="question-chip" onclick="askQuestion('Pengangkutan', this)">🚌 Tempahan Bas & Van</button>
         <button class="question-chip" onclick="askQuestion('Aktiviti', this)">💡 Aktiviti, Kelab & Inovasi</button>
         <button class="question-chip" onclick="askQuestion('MPP', this)">👑 MPP & Kepimpinan</button>
-        <button class="question-chip" onclick="askQuestion('Cenderahati', this)">🎁 Ambil Cenderahati</button>
+        <button class="question-chip" onclick="askQuestion('Cenderahati', this)">👕 Cenderahati, Baju & Peralatan</button>
+        <button class="question-chip" onclick="askQuestion('Protokol', this)">🔊 Protokol, PA System & Grafik</button>
         <button class="question-chip" onclick="askQuestion('Kewangan', this)">💰 Hal Ehwal Kewangan</button>
       </div>
 
@@ -134,7 +198,7 @@
         <h3 id="current-view-title">Senarai Pegawai & Kaunter Bertugas</h3>
         <p class="directory-sub-hint">Klik <b>"Lihat Senarai Penuh Urusan"</b> pada kad untuk semak butiran lengkap, atau klik emel untuk berhubung.</p>
       </div>
-      <span id="match-count-badge" class="count-pill">17 Pegawai</span>
+      <span id="match-count-badge" class="count-pill">18 Pegawai</span>
     </div>
 
     <!-- Big Portrait Cards Grid -->
@@ -146,7 +210,7 @@
     <div id="no-match-box" class="empty-vibe-state" style="display: none;">
       <div class="empty-icon-wrap"><i data-lucide="sparkles"></i></div>
       <h4>Harap Maaf tiada padanan ditemui.</h4>
-      <p>Cuba kata kunci ringkas seperti <b>PTPTN</b>, <b>Pillars</b>, <b>Zakat</b>, <b>Bas</b>, <b>Van</b>, <b>Cenderahati</b>, atau klik butang di bawah untuk lihat semua pegawai.</p>
+      <p>Cuba kata kunci ringkas seperti <b>PTPTN</b>, <b>Pillars</b>, <b>Baju</b>, <b>PA System</b>, <b>Bilik</b>, <b>Zakat</b>, <b>Bas</b>, atau klik butang di bawah untuk lihat semua pegawai.</p>
       <button class="btn-reset-search" onclick="clearVibeSearch()">✨ Papar Semua Pegawai</button>
     </div>
   </main>
@@ -186,7 +250,7 @@
           </div>
         </div>
 
-        <!-- Timbalan Pengarah 1 (Updated: Cik Nurul Ashikin Binti Abdul Halim) -->
+        <!-- Timbalan Pengarah 1 -->
         <div class="lead-vibe-card">
           <div class="shine-aura warm-aura"></div>
           <div class="lead-rank-ribbon charcoal">
@@ -209,7 +273,7 @@
           </div>
         </div>
 
-        <!-- Timbalan Pengarah 2 (Updated: Dr. Abdullah Bin Abdul Samat) -->
+        <!-- Timbalan Pengarah 2 -->
         <div class="lead-vibe-card">
           <div class="shine-aura warm-aura"></div>
           <div class="lead-rank-ribbon charcoal">
@@ -269,7 +333,7 @@
     <div class="container footer-inner">
       <div class="footer-brand-text">
         <strong>JHEP ASSIST • JABATAN HAL EHWAL PELAJAR & ALUMNI (JHEP)</strong>
-        <span>Universiti Malaysia Perlis (UniMAP) • Kampus Alam Pauh Putra, 02600 Arau, Perlis</span>
+        <span>Universiti Malaysia Perlis (UniMAP) • Isnin – Jumaat (8.30 pg – 4.30 ptg) • Sabtu & Ahad Cuti</span>
       </div>
       <div class="footer-right-col">
         <a href="mailto:jhep@unimap.edu.my" class="footer-email-link">

@@ -80,7 +80,7 @@ body {
 .hero-bg-photo {
   position: absolute;
   inset: 0;
-  background-image: url('images/jhep-building.jpg');
+  background-image: url('cropped-images/jhep-building.jpg');
   background-size: cover;
   background-position: center;
   opacity: 0.24;
@@ -137,6 +137,13 @@ body {
   font-weight: 700;
   padding: 6px 13px;
   border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.hours-pill:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(245, 158, 11, 0.5);
 }
 
 .status-glow {
@@ -145,6 +152,16 @@ body {
   background-color: var(--accent-green);
   border-radius: 50%;
   box-shadow: 0 0 8px var(--accent-green);
+}
+
+.status-glow.break {
+  background-color: #fbbf24;
+  box-shadow: 0 0 8px #fbbf24;
+}
+
+.status-glow.closed {
+  background-color: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
 }
 
 .hero-big-title {
@@ -330,6 +347,212 @@ body {
   font-size: 0.74rem;
   color: var(--slate-600);
   font-weight: 600;
+}
+
+/* ==========================================================================
+   1B. Waktu Operasi & Panduan Kaunter JHEP
+   ========================================================================== */
+.waktu-operasi-section {
+  background: var(--site-cream);
+  padding: 28px 0;
+  border-bottom: 1.5px solid var(--site-border);
+}
+
+.operasi-card-shell {
+  background: var(--white);
+  border: 1.5px solid var(--site-border);
+  border-radius: var(--radius-xl);
+  padding: 22px 24px;
+  box-shadow: var(--shadow-card);
+}
+
+.operasi-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--site-border);
+}
+
+.operasi-title-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.operasi-icon-box {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--jhep-gold-light);
+  color: var(--jhep-gold-dark);
+  border: 1px solid #fcd34d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.operasi-title-left h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--charcoal-900);
+  line-height: 1.25;
+}
+
+.operasi-title-left p {
+  font-size: 0.8rem;
+  color: var(--slate-600);
+}
+
+.operasi-live-badge {
+  background: var(--charcoal-900);
+  color: #fde68a;
+  border: 1px solid var(--jhep-gold);
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+}
+
+.operasi-live-badge.is-open {
+  background: #ecfdf5;
+  color: #065f46;
+  border-color: #6ee7b7;
+}
+
+.operasi-live-badge.is-break {
+  background: #fffbeb;
+  color: #92400e;
+  border-color: #fcd34d;
+}
+
+.operasi-live-badge.is-closed {
+  background: #fef2f2;
+  color: #991b1b;
+  border-color: #fca5a5;
+}
+
+.operasi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.operasi-item {
+  background: var(--site-cream-light);
+  border: 1px solid var(--site-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.operasi-item.highlight-main {
+  background: linear-gradient(135deg, #181c22 0%, #262d37 100%);
+  border-color: var(--jhep-gold);
+  color: var(--white);
+}
+
+.operasi-item.closed-item {
+  background: #fffafa;
+  border-color: #fecaca;
+}
+
+.op-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--slate-500);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.operasi-item.highlight-main .op-label {
+  color: #fde68a;
+}
+
+.operasi-item.closed-item .op-label {
+  color: #b91c1c;
+}
+
+.operasi-item strong {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--charcoal-900);
+}
+
+.operasi-item.highlight-main strong {
+  color: var(--white);
+}
+
+.op-time {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--jhep-gold-dark);
+}
+
+.op-time.gold-text {
+  color: #fbbf24;
+}
+
+.op-time.closed-text {
+  color: #dc2626;
+}
+
+.kaunter-steps-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  background: var(--jhep-gold-light);
+  border: 1px solid #fcd34d;
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+}
+
+.step-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.77rem;
+  color: var(--charcoal-900);
+  line-height: 1.35;
+}
+
+.step-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--charcoal-900);
+  color: #fde68a;
+  font-size: 0.74rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .operasi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .kaunter-steps-bar {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .operasi-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ==========================================================================
