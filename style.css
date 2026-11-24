@@ -2771,8 +2771,10 @@ body.is-embedded .ai-sidebar-footer {
     padding: 4px 8px;
   }
 
-  /* Mobile Chatbot adjustments: slim topbar, pinned bottom input, zero right-edge overflow */
+  /* Mobile Chatbot: pin search/chat input right below topbar so it NEVER gets clipped
+     off the bottom of Google Sites mobile iframe or pushed by Android's keyboard! */
   .jhep-ai-topbar {
+    order: 1;
     padding: 8px 10px;
   }
 
@@ -2781,8 +2783,16 @@ body.is-embedded .ai-sidebar-footer {
     white-space: nowrap;
   }
 
+  .jhep-ai-composer-wrap {
+    order: 2;
+    border-top: none;
+    border-bottom: 1.5px solid var(--site-border);
+    padding: 8px 10px;
+  }
+
   .jhep-ai-scroll {
-    padding: 12px 12px 18px 12px;
+    order: 3;
+    padding: 12px 12px 90px 12px;
   }
 
   .ai-hero-greeting h3 {
@@ -2791,10 +2801,6 @@ body.is-embedded .ai-sidebar-footer {
 
   .ai-turn-user {
     max-width: 90%;
-  }
-
-  .jhep-ai-composer-wrap {
-    padding: 8px 12px calc(8px + env(safe-area-inset-bottom)) 12px;
   }
 
   .jhep-ai-caption {
