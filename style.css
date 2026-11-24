@@ -1789,6 +1789,8 @@ body {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   padding: 24px 20px;
 }
 
@@ -2536,11 +2538,13 @@ body::-webkit-scrollbar,
 }
 
 /* Google Sites iframe embed fix:
-   Lock outer document so ONLY #view-directory-wrapper scrolls internally!
-   This keeps the top-center [Direktori | Tanya AI] toggle 100% visible even when scrolled way down! */
+   Lock outer document so ONLY #view-directory-wrapper & .jhep-ai-scroll scroll internally!
+   This keeps the top-center [Direktori | Tanya AI] toggle 100% locked in BOTH modes! */
+html:has(body.is-embedded),
 body.is-embedded {
   height: 100%;
   overflow: hidden !important;
+  overscroll-behavior: none;
 }
 
 body.is-embedded #view-directory-wrapper {
@@ -2556,9 +2560,14 @@ body.is-embedded #view-directory-wrapper {
 }
 
 body.is-embedded .chatbot-fullscreen-wrapper {
+  position: fixed;
   top: 0;
-  bottom: auto;
-  height: calc(100dvh - 58px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: contain;
 }
 
 /* ==========================================================================
@@ -2803,12 +2812,6 @@ body.is-embedded .chatbot-fullscreen-wrapper {
   .dock-mode-btn {
     padding: 6px 10px;
     font-size: 0.74rem;
-  }
-
-  body.is-embedded .chatbot-fullscreen-wrapper {
-    top: 0;
-    bottom: auto;
-    height: calc(100dvh - 60px);
   }
 
   .welcome-modal-card {
