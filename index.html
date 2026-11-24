@@ -2,8 +2,8 @@
 <html lang="ms">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JHEP Assist — Panduan Pantas Urusan Pelajar & Staf UniMAP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>JHEP Assist & TanyaJHEP AI — Portal Rasmi Urusan Pelajar & HEPA UniMAP</title>
   <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,313 +14,467 @@
 </head>
 <body>
 
-  <!-- 1. WELCOME HERO BANNER: JHEP ASSIST -->
-  <section class="welcome-hero">
-    <div class="hero-bg-photo"></div>
-    <div class="hero-bg-overlay"></div>
-    <div class="container hero-grid">
-      <div class="hero-text-col">
-        <div class="welcome-pill-row">
-          <span class="welcome-pill">
-            <i data-lucide="sparkles" class="icon-xs"></i>
-            <span>JABATAN HAL EHWAL PELAJAR & ALUMNI (JHEP)</span>
-          </span>
-          <a href="#waktu-operasi" class="hours-pill" id="live-status-pill" title="Klik untuk lihat jadual penuh Waktu Operasi JHEP">
-            <span class="status-glow" id="live-status-dot"></span>
-            <span id="live-status-text">Isnin – Jumaat (8.30 pg – 4.30 ptg)</span>
-          </a>
-        </div>
+  <!-- =========================================================================
+       VIEW A: DIREKTORI PIC (JHEP ASSIST)
+       ========================================================================= -->
+  <div id="view-directory-wrapper">
 
-        <h1 class="hero-big-title">
-          <span class="text-gradient-gold">JHEP Assist</span>
-        </h1>
-        <p class="hero-tagline">Panduan Interaktif Urusan Pelajar & Direktori Pegawai JHEP UniMAP</p>
-        <div class="gold-accent-bar"></div>
+    <!-- 1. CLEAN COMPACT WELCOME HERO BANNER (No bulky pills or redundant buttons) -->
+    <section class="welcome-hero">
+      <div class="hero-bg-photo"></div>
+      <div class="hero-bg-overlay"></div>
+      <div class="container hero-grid">
+        <div class="hero-text-col">
+          <h1 class="hero-big-title">
+            <span class="text-gradient-gold">JHEP Assist</span>
+          </h1>
+          <p class="hero-tagline">Direktori Pegawai (PIC) & Pembantu AI Pintar HEPA UniMAP</p>
+          <div class="gold-accent-bar"></div>
 
-        <p class="hero-lead">
-          Selamat datang ke <b>JHEP Assist</b>! Sila semak urusan anda terlebih dahulu sebelum berurusan di kaunter JHEP bagi melancarkan perkhidmatan bersama pegawai yang bertanggungjawab.
-        </p>
+          <p class="hero-lead">
+            Semak pegawai bertanggungjawab (PIC), lokasi kaunter & emel rasmi di <b>Jabatan Hal Ehwal Pelajar & Alumni (JHEP) UniMAP</b> — atau klik butang <b>Tanya AI</b> di kanan bawah untuk bersembang dengan pembantu pintar HEPA.
+          </p>
 
-        <div class="hero-meta-badges">
-          <div class="meta-chip">
-            <i data-lucide="map-pin" class="icon-sm"></i>
-            <span>Bangunan JHEP, Kampus Alam Pauh Putra, UniMAP</span>
-          </div>
-          <div class="meta-chip">
-            <i data-lucide="mail" class="icon-sm"></i>
-            <a href="mailto:jhep@unimap.edu.my">jhep@unimap.edu.my</a>
-          </div>
-        </div>
-
-        <div class="hero-cta-row">
-          <a href="#urusan-finder" class="btn-hero-primary">
-            <i data-lucide="zap" class="icon-sm"></i>
-            <span>Mula Carian Pantas</span>
-          </a>
-          <a href="#waktu-operasi" class="btn-hero-glass">
-            <i data-lucide="clock" class="icon-sm"></i>
-            <span>Waktu Operasi</span>
-          </a>
-          <a href="#top-leadership" class="btn-hero-glass">
-            <i data-lucide="crown" class="icon-sm"></i>
-            <span>Pengurusan Tertinggi</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="hero-visual-col">
-        <div class="hero-visual-frame">
-          <img src="cropped-images/hero-campus.png" alt="Mahasiswa UniMAP" class="hero-main-img">
-          <div class="floating-motto-card">
-            <div class="motto-dots">
-              <span class="dot charcoal"></span>
-              <span class="dot gold"></span>
-              <span class="dot green"></span>
+          <div class="hero-meta-badges">
+            <div class="meta-chip">
+              <i data-lucide="map-pin" class="icon-sm"></i>
+              <span>Bangunan JHEP, Kampus Alam Pauh Putra</span>
             </div>
-            <div>
-              <strong>Salam • Mesra • Senyum</strong>
-              <span>UniMAP Prihatin, Mahasiswa Sejahtera</span>
+            <div class="meta-chip">
+              <i data-lucide="mail" class="icon-sm"></i>
+              <a href="mailto:jhep@unimap.edu.my">jhep@unimap.edu.my</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual-col">
+          <div class="hero-visual-frame">
+            <img src="cropped-images/hero-campus.png" alt="Mahasiswa UniMAP" class="hero-main-img">
+            <div class="floating-motto-card">
+              <div class="motto-dots">
+                <span class="dot charcoal"></span>
+                <span class="dot gold"></span>
+                <span class="dot green"></span>
+              </div>
+              <div>
+                <strong>Salam • Mesra • Senyum</strong>
+                <span>UniMAP Prihatin, Mahasiswa Sejahtera</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- 1B. WAKTU OPERASI & PANDUAN RINGKAS KAUNTER JHEP (Mobile-friendly compact 2x2 grid) -->
+    <section class="waktu-operasi-section" id="waktu-operasi">
+      <div class="container">
+        <div class="operasi-card-shell">
+          <div class="operasi-header-row">
+            <div class="operasi-title-left">
+              <span class="operasi-icon-box"><i data-lucide="clock" class="icon-sm"></i></span>
+              <div>
+                <h3>Waktu Operasi Kaunter JHEP</h3>
+                <p>Hadir mengikut waktu operasi rasmi pejabat</p>
+              </div>
+            </div>
+            <span class="operasi-live-badge" id="operasi-live-badge">Isnin – Jumaat: 8.30 pg – 4.30 ptg</span>
+          </div>
+
+          <div class="operasi-grid">
+            <div class="operasi-item highlight-main">
+              <span class="op-label"><i data-lucide="calendar-check" class="icon-xs"></i> Beroperasi</span>
+              <strong>Isnin – Jumaat</strong>
+              <span class="op-time gold-text">8.30 pg – 4.30 ptg</span>
+            </div>
+
+            <div class="operasi-item">
+              <span class="op-label"><i data-lucide="coffee" class="icon-xs"></i> Rehat (Isnin – Khamis)</span>
+              <strong>Isnin – Khamis</strong>
+              <span class="op-time">1.00 ptg – 2.00 ptg</span>
+            </div>
+
+            <div class="operasi-item">
+              <span class="op-label"><i data-lucide="coffee" class="icon-xs"></i> Rehat (Jumaat)</span>
+              <strong>Hari Jumaat</strong>
+              <span class="op-time">12.15 tgh – 2.45 ptg</span>
+            </div>
+
+            <div class="operasi-item closed-item">
+              <span class="op-label"><i data-lucide="calendar-x" class="icon-xs"></i> Cuti</span>
+              <strong>Sabtu / Ahad</strong>
+              <span class="op-time closed-text">Tutup & Cuti Umum</span>
+            </div>
+          </div>
+
+          <div class="kaunter-steps-bar">
+            <div class="step-pill">
+              <span class="step-num">1</span>
+              <span><b>SEMAK</b> urusan atau tanya <b>AI Chatbot</b></span>
+            </div>
+            <div class="step-pill">
+              <span class="step-num">2</span>
+              <span><b>KENAL PASTI PIC</b> bagi urusan anda</span>
+            </div>
+            <div class="step-pill">
+              <span class="step-num">3</span>
+              <span><b>HADIR / EMEL</b> ke kaunter JHEP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. CARIAN PANTAS PELAJAR & STAF -->
+    <section class="vibe-finder-section" id="urusan-finder">
+      <div class="container finder-container">
+        
+        <div class="finder-header">
+          <span class="finder-eyebrow"><i data-lucide="compass" class="icon-xs"></i> CARIAN PANTAS PIC PELAJAR & STAF</span>
+          <h2>Ada urusan apa kat JHEP hari ni? 🤔</h2>
+          <p>Klik topik di bawah atau taip kata kunci — <b>JHEP Assist</b> tunjukkan pegawai (PIC) yang tepat!</p>
+        </div>
+
+        <!-- Main Search Box -->
+        <div class="fun-search-bar">
+          <div class="search-icon-badge">
+            <i data-lucide="search" class="icon-sm"></i>
+          </div>
+          <input 
+            type="text" 
+            id="vibe-search-input" 
+            placeholder="Taip urusan (cth: nak pinjam PA system, baju korporat, PTPTN, PILLARS, zakat)..." 
+            autocomplete="off"
+            oninput="handleQuickSearch(this.value)"
+          >
+          <button id="btn-clear-vibe" class="vibe-clear-btn" onclick="clearVibeSearch()" style="display: none;" title="Kosongkan carian">
+            <i data-lucide="x" class="icon-xs"></i>
+          </button>
+        </div>
+
+        <!-- Co-Translation Bridge Banner -->
+        <div id="ask-ai-bridge" class="ask-ai-bridge" style="display: none;">
+          <button type="button" class="btn-bridge-to-ai" onclick="bridgeSearchToChatbot()">
+            <i data-lucide="bot" class="icon-sm"></i>
+            <span>Nak penerangan lanjut tentang <b id="bridge-query-preview"></b>? Tanya terus <b>TanyaJHEP AI</b> →</span>
+          </button>
+        </div>
+
+        <!-- Fun Short Question Chips (Horizontal scrollable on mobile for clean UX!) -->
+        <div class="short-questions-wrap">
+          <button class="question-chip active" onclick="askQuestion('', this)">✨ Semua (18)</button>
+          <button class="question-chip" onclick="askQuestion('Temu Janji', this)">📅 Temu Janji & Bilik</button>
+          <button class="question-chip" onclick="askQuestion('Kebajikan', this)">💝 Kebajikan, Zakat & GL</button>
+          <button class="question-chip" onclick="askQuestion('PTPTN', this)">🎓 PTPTN & Pembiayaan</button>
+          <button class="question-chip" onclick="askQuestion('PILLARS', this)">⭐ PILLARS & Sukarelawan</button>
+          <button class="question-chip" onclick="askQuestion('Pengangkutan', this)">🚌 Bas & Van</button>
+          <button class="question-chip" onclick="askQuestion('Kelab Inovasi', this)">💡 Kelab & Inovasi</button>
+          <button class="question-chip" onclick="askQuestion('MPP', this)">👑 MPP & Kepimpinan</button>
+          <button class="question-chip" onclick="askQuestion('Cenderahati', this)">👕 Baju, Cenderahati & Peralatan</button>
+          <button class="question-chip" onclick="askQuestion('Protokol', this)">🔊 Protokol, PA System & Grafik</button>
+          <button class="question-chip" onclick="askQuestion('Kewangan', this)">💰 Kewangan</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. PAPARAN HASIL CARIAN & SENARAI PEGAWAI -->
+    <main class="container staff-directory-stream" id="staff-directory-section">
+      <div class="directory-top-meta">
+        <div>
+          <h3 id="current-view-title">Senarai Pegawai & Kaunter Bertugas</h3>
+          <p class="directory-sub-hint">Klik <b>"Lihat Senarai Penuh Urusan"</b> untuk butiran lengkap, atau klik emel untuk berhubung.</p>
+        </div>
+        <span id="match-count-badge" class="count-pill">18 Pegawai</span>
+      </div>
+
+      <!-- Big Portrait Cards Grid -->
+      <div class="vibe-cards-grid" id="staff-grid">
+        <!-- Injected dynamically via app.js -->
+      </div>
+
+      <!-- Empty Search State -->
+      <div id="no-match-box" class="empty-vibe-state" style="display: none;">
+        <div class="empty-icon-wrap"><i data-lucide="sparkles"></i></div>
+        <h4>Harap Maaf tiada padanan ditemui.</h4>
+        <p>Cuba kata kunci ringkas seperti <b>PTPTN</b>, <b>Pillars</b>, <b>Baju</b>, <b>PA System</b>, <b>Bilik</b>, <b>Zakat</b>, atau tanya terus <b>TanyaJHEP AI Chatbot</b>.</p>
+        <div class="empty-actions-row">
+          <button class="btn-reset-search" onclick="clearVibeSearch()">✨ Papar Semua Pegawai</button>
+          <button class="btn-ask-ai-empty" onclick="bridgeSearchToChatbot()">🤖 Tanya Soalan Ini pada AI →</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- 4. PENGURUSAN TERTINGGI JHEP -->
+    <section class="section-tertinggi" id="top-leadership">
+      <div class="container">
+        <div class="section-heading-center">
+          <span class="vibe-badge"><i data-lucide="crown" class="icon-xs"></i> Kepimpinan Utama</span>
+          <h2>Pengurusan Tertinggi JHEP</h2>
+          <div class="center-gold-line"></div>
+          <p>Barisan peneraju utama Jabatan Hal Ehwal Pelajar & Alumni Universiti Malaysia Perlis</p>
+        </div>
+
+        <div class="tertinggi-grid">
+          <!-- Pengarah -->
+          <div class="lead-vibe-card main-lead">
+            <div class="shine-aura gold-aura"></div>
+            <div class="lead-rank-ribbon gold">
+              <i data-lucide="award" class="icon-xs"></i> Pengarah JHEP
+            </div>
+            <div class="lead-img-showcase">
+              <img src="cropped-images/lead-syahmie.png" alt="Prof. Madya Ir. Ts. Dr. Mohamad Syahmie Bin Mohamad Rasidi">
+            </div>
+            <div class="lead-text">
+              <h3>Prof. Madya Ir. Ts. Dr. Mohamad Syahmie</h3>
+              <p class="lead-full-title">Bin Mohamad Rasidi</p>
+              <div class="lead-meta-stack">
+                <div class="lead-location">
+                  <i data-lucide="map-pin" class="icon-xs"></i> Aras 1, Pejabat JHEP
+                </div>
+                <a href="mailto:syahmie@unimap.edu.my" class="lead-email-pill">
+                  <i data-lucide="mail" class="icon-xs"></i> syahmie@unimap.edu.my
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timbalan Pengarah 1 -->
+          <div class="lead-vibe-card">
+            <div class="shine-aura warm-aura"></div>
+            <div class="lead-rank-ribbon charcoal">Timbalan Pengarah 1</div>
+            <div class="lead-img-showcase">
+              <img src="cropped-images/lead-ashikin.png" alt="Cik Nurul Ashikin Binti Abdul Halim">
+            </div>
+            <div class="lead-text">
+              <h3>Cik Nurul Ashikin</h3>
+              <p class="lead-full-title">Binti Abdul Halim</p>
+              <div class="lead-meta-stack">
+                <div class="lead-location">
+                  <i data-lucide="map-pin" class="icon-xs"></i> Aras Bawah, Pejabat JHEP
+                </div>
+                <a href="mailto:nurulashikin@unimap.edu.my" class="lead-email-pill">
+                  <i data-lucide="mail" class="icon-xs"></i> nurulashikin@unimap.edu.my
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timbalan Pengarah 2 -->
+          <div class="lead-vibe-card">
+            <div class="shine-aura warm-aura"></div>
+            <div class="lead-rank-ribbon charcoal">Timbalan Pengarah 2</div>
+            <div class="lead-img-showcase">
+              <img src="cropped-images/lead-abdullah.png" alt="Dr. Abdullah Bin Abdul Samat">
+            </div>
+            <div class="lead-text">
+              <h3>Dr. Abdullah</h3>
+              <p class="lead-full-title">Bin Abdul Samat</p>
+              <div class="lead-meta-stack">
+                <div class="lead-location">
+                  <i data-lucide="map-pin" class="icon-xs"></i> Aras Bawah, Pejabat JHEP
+                </div>
+                <a href="mailto:abdullahsamat@unimap.edu.my" class="lead-email-pill">
+                  <i data-lucide="mail" class="icon-xs"></i> abdullahsamat@unimap.edu.my
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timbalan Pendaftar -->
+          <div class="lead-vibe-card">
+            <div class="shine-aura warm-aura"></div>
+            <div class="lead-rank-ribbon slate">Timbalan Pendaftar</div>
+            <div class="lead-img-showcase">
+              <img src="cropped-images/lead-hasrul.png" alt="En. Hasrul Nizam Bin Halim">
+            </div>
+            <div class="lead-text">
+              <h3>En. Hasrul Nizam</h3>
+              <p class="lead-full-title">Bin Halim</p>
+              <div class="lead-meta-stack">
+                <div class="lead-location">
+                  <i data-lucide="map-pin" class="icon-xs"></i> Aras 1, Pejabat JHEP
+                </div>
+                <a href="mailto:hasrulnizam@unimap.edu.my" class="lead-email-pill">
+                  <i data-lucide="mail" class="icon-xs"></i> hasrulnizam@unimap.edu.my
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer (Visible in Directory Mode) -->
+    <footer class="simple-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand-text">
+          <strong>JHEP ASSIST & TANYAJHEP AI • JABATAN HAL EHWAL PELAJAR & ALUMNI (JHEP)</strong>
+          <span>Universiti Malaysia Perlis (UniMAP) • Isnin – Jumaat (8.30 pg – 4.30 ptg) • Sabtu & Ahad Cuti</span>
+        </div>
+        <div class="footer-right-col">
+          <a href="mailto:jhep@unimap.edu.my" class="footer-email-link">
+            <i data-lucide="mail" class="icon-xs"></i> jhep@unimap.edu.my
+          </a>
+          <span class="footer-vibe">Salam • Mesra • Senyum</span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- =========================================================================
+       VIEW B: FULL-SCREEN TANYAJHEP AI CHATBOT (Clean Web + App-Like Mobile!)
+       ========================================================================= -->
+  <section id="view-chatbot-wrapper" class="chatbot-fullscreen-wrapper" style="display: none;">
+    <div class="jhep-ai-fullscreen-shell">
+
+      <!-- Mobile FAQ Drawer Backdrop -->
+      <div id="aiSidebarBackdrop" class="ai-sidebar-backdrop" onclick="toggleMobileFaqDrawer(false)"></div>
+
+      <!-- Left FAQ Sidebar (Persistent on Desktop, Slide-Over Drawer on Mobile!) -->
+      <aside class="jhep-ai-sidebar" id="aiSidebarDrawer">
+        <div class="ai-sidebar-top-row">
+          <button type="button" class="ai-new-chat-btn" onclick="startNewAiChat(); toggleMobileFaqDrawer(false);">
+            <span id="aiNewChatLabel">+ Perbualan Baharu</span>
+            <i data-lucide="rotate-ccw" class="icon-xs"></i>
+          </button>
+          <button type="button" class="ai-drawer-close-btn" onclick="toggleMobileFaqDrawer(false)" title="Tutup">
+            <i data-lucide="x" class="icon-sm"></i>
+          </button>
+        </div>
+
+        <div class="ai-sidebar-label" id="aiTopicsHeader">Soalan Lazim HEPA & Pembiayaan</div>
+        <div class="ai-sidebar-topics" id="aiSidebarTopics">
+          <!-- Populated dynamically from knowledge_base.js -->
+        </div>
+
+        <div class="ai-sidebar-footer">
+          <button type="button" class="ai-emergency-pic-btn" onclick="escalateToPicDirectory('Kebajikan')">
+            <i data-lucide="shield-alert" class="icon-sm"></i>
+            <span id="aiEmergencyPicLabel">Kecemasan / PIC Kebajikan</span>
+          </button>
+          <button type="button" class="ai-back-dir-btn" onclick="switchHubMode('directory', true)">
+            <i data-lucide="users" class="icon-xs"></i>
+            <span id="aiViewAllPicLabel">Direktori 18 PIC JHEP</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Full-Height Conversational Stage -->
+      <div class="jhep-ai-stage">
+
+        <!-- Slim, Clean Chatbot Topbar (Mobile + Desktop) -->
+        <div class="jhep-ai-topbar">
+          <div class="ai-topbar-left">
+            <button type="button" class="ai-mobile-menu-btn" onclick="toggleMobileFaqDrawer(true)" title="Soalan Lazim (FAQ)">
+              <i data-lucide="menu" class="icon-sm"></i>
+              <span>FAQ</span>
+            </button>
+            <div class="ai-brand-group">
+              <span class="ai-avatar-header"><i data-lucide="bot" class="icon-sm"></i></span>
+              <div>
+                <strong>TanyaJHEP AI</strong>
+                <span class="ai-subtag" id="aiModelSubtag">Pembantu Pintar HEPA UniMAP</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-topbar-right">
+            <div class="ai-lang-segment">
+              <button type="button" class="ai-lang-pill active" id="aiBtnMs" onclick="setAiLanguage('ms')">BM</button>
+              <button type="button" class="ai-lang-pill" id="aiBtnEn" onclick="setAiLanguage('en')">EN</button>
+            </div>
+            <button type="button" class="ai-topbar-dir-btn" onclick="switchHubMode('directory', true)" title="Kembali ke Direktori PIC">
+              <i data-lucide="users" class="icon-xs"></i>
+              <span>Direktori PIC</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Scrollable Full-Height Conversation Stream -->
+        <div class="jhep-ai-scroll" id="aiChatScroll">
+          <div class="jhep-ai-column" id="aiChatColumn">
+            <!-- Greeting Hero or Chat Bubbles injected dynamically -->
+          </div>
+        </div>
+
+        <!-- Pinned Bottom Input Composer -->
+        <div class="jhep-ai-composer-wrap">
+          <form class="jhep-ai-composer-box" id="aiComposerForm">
+            <input
+              type="text"
+              id="aiUserInput"
+              class="jhep-ai-input"
+              placeholder="Tanya tentang PTPTN, Kelas Pertama 2026, Zakat/GL, PILLARS, Baju, PA System..."
+              autocomplete="off"
+            />
+            <button type="submit" class="jhep-ai-send-btn" title="Hantar Soalan">
+              <i data-lucide="send" class="icon-sm"></i>
+            </button>
+          </form>
+          <div class="jhep-ai-caption" id="aiComposerCaption">
+            Pembantu AI Rasmi HEPA UniMAP • Disertakan pautan terus kepada Pegawai Bertanggungjawab (PIC).
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </section>
 
-  <!-- 1B. WAKTU OPERASI & PANDUAN RINGKAS KAUNTER JHEP -->
-  <section class="waktu-operasi-section" id="waktu-operasi">
-    <div class="container">
-      <div class="operasi-card-shell">
-        <div class="operasi-header-row">
-          <div class="operasi-title-left">
-            <span class="operasi-icon-box"><i data-lucide="clock" class="icon-sm"></i></span>
-            <div>
-              <h3>Waktu Operasi Kaunter JHEP</h3>
-              <p>Pastikan anda hadir mengikut waktu operasi kaunter Jabatan Hal Ehwal Pelajar</p>
-            </div>
-          </div>
-          <span class="operasi-live-badge" id="operasi-live-badge">Isnin – Jumaat: 8.30 Pagi – 4.30 Petang</span>
+  <!-- =========================================================================
+       WELCOME POP-UP MODAL: Live Counter Status + Choose Directory or AI Chatbot
+       ========================================================================= -->
+  <div id="welcome-entry-modal" class="welcome-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="welcomeModalTitle" onclick="if(event.target === this) closeWelcomeModal()">
+    <div class="welcome-modal-card">
+      <button type="button" class="welcome-modal-close" onclick="closeWelcomeModal()" aria-label="Tutup">
+        <i data-lucide="x" class="icon-sm"></i>
+      </button>
+
+      <div class="welcome-modal-header">
+        <span class="welcome-brand-chip">JHEP ASSIST • UNIMAP</span>
+        <h2 id="welcomeModalTitle">Selamat Datang ke JHEP UniMAP</h2>
+        <div id="welcome-live-status" class="welcome-status-banner is-closed">
+          🔴 Kaunter JHEP telah ditutup (Buka Isnin – Jumaat, 8.30 pg – 4.30 ptg)
         </div>
-
-        <div class="operasi-grid">
-          <div class="operasi-item highlight-main">
-            <span class="op-label"><i data-lucide="calendar-check" class="icon-xs"></i> Waktu Beroperasi</span>
-            <strong>Isnin hingga Jumaat</strong>
-            <span class="op-time gold-text">8.30 Pagi – 4.30 Petang</span>
-          </div>
-
-          <div class="operasi-item">
-            <span class="op-label"><i data-lucide="coffee" class="icon-xs"></i> Waktu Rehat (Isnin – Khamis)</span>
-            <strong>Isnin – Khamis</strong>
-            <span class="op-time">1.00 Petang – 2.00 Petang</span>
-          </div>
-
-          <div class="operasi-item">
-            <span class="op-label"><i data-lucide="coffee" class="icon-xs"></i> Waktu Rehat (Jumaat)</span>
-            <strong>Hari Jumaat</strong>
-            <span class="op-time">12.15 Petang – 2.45 Petang</span>
-          </div>
-
-          <div class="operasi-item closed-item">
-            <span class="op-label"><i data-lucide="calendar-x" class="icon-xs"></i> Hari Cuti</span>
-            <strong>Sabtu / Ahad</strong>
-            <span class="op-time closed-text">Tutup & Cuti Umum</span>
-          </div>
-        </div>
-
-        <div class="kaunter-steps-bar">
-          <div class="step-pill">
-            <span class="step-num">1</span>
-            <span><b>SEMAK</b> jenis urusan (cth: PTPTN, PILLARS, baju/cenderahati, PA System, bilik, zakat)</span>
-          </div>
-          <div class="step-pill">
-            <span class="step-num">2</span>
-            <span><b>KENAL PASTI</b> pegawai yang bertanggungjawab bagi urusan tersebut</span>
-          </div>
-          <div class="step-pill">
-            <span class="step-num">3</span>
-            <span><b>HADIR</b> ke kaunter / aras JHEP mengikut pegawai yang dipaparkan</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2. CARIAN PANTAS PELAJAR & STAF ("Ada urusan apa kat JHEP hari ni?") -->
-  <section class="vibe-finder-section" id="urusan-finder">
-    <div class="container finder-container">
-      
-      <div class="finder-header">
-        <span class="finder-eyebrow"><i data-lucide="compass" class="icon-xs"></i> CARIAN PANTAS PELAJAR & STAF</span>
-        <h2>Ada urusan apa kat JHEP hari ni? 🤔</h2>
-        <p>Klik topik urusan di bawah atau taip sahaja kata kunci — <b>JHEP Assist</b> tunjukkan pegawai yang tepat!</p>
+        <p class="welcome-modal-sub">Sila pilih perkhidmatan yang anda ingin gunakan:</p>
       </div>
 
-      <!-- Main Search Box -->
-      <div class="fun-search-bar">
-        <div class="search-icon-badge">
-          <i data-lucide="search" class="icon-sm"></i>
-        </div>
-        <input 
-          type="text" 
-          id="vibe-search-input" 
-          placeholder="Taip urusan / kata kunci (cth: PTPTN, PILLARS, baju korporat, jaket, PA system, banner, bilik gerakan, zakat)..." 
-          autocomplete="off"
-          oninput="handleQuickSearch(this.value)"
-        >
-        <button id="btn-clear-vibe" class="vibe-clear-btn" onclick="clearVibeSearch()" style="display: none;" title="Kosongkan carian">
-          <i data-lucide="x" class="icon-xs"></i>
+      <div class="welcome-choice-grid">
+        <button type="button" class="welcome-choice-btn choice-dir" onclick="selectInitialMode('directory')">
+          <span class="choice-icon-box"><i data-lucide="users" class="icon-md"></i></span>
+          <div class="choice-text">
+            <strong>Direktori Pegawai (PIC)</strong>
+            <span>Cari pegawai bertanggungjawab, lokasi aras &amp; emel rasmi JHEP</span>
+          </div>
+          <i data-lucide="chevron-right" class="icon-sm choice-arrow"></i>
+        </button>
+
+        <button type="button" class="welcome-choice-btn choice-ai" onclick="selectInitialMode('chatbot')">
+          <span class="choice-icon-box"><i data-lucide="bot" class="icon-md"></i></span>
+          <div class="choice-text">
+            <strong>TanyaJHEP AI Chatbot</strong>
+            <span>Tanya info lanjut mengenai HEPA, PTPTN, Kebajikan &amp; PILLARS (BM / EN)</span>
+          </div>
+          <i data-lucide="chevron-right" class="icon-sm choice-arrow"></i>
         </button>
       </div>
-
-      <!-- Fun Short Question Chips -->
-      <div class="short-questions-wrap">
-        <button class="question-chip active" onclick="askQuestion('', this)">✨ Semua Pegawai (18)</button>
-        <button class="question-chip" onclick="askQuestion('Temu Janji', this)">📅 Temu Janji & Bilik Mesyuarat</button>
-        <button class="question-chip" onclick="askQuestion('Kebajikan', this)">💝 Kebajikan, Zakat & Hospital (GL)</button>
-        <button class="question-chip" onclick="askQuestion('PTPTN', this)">🎓 PTPTN & Pembiayaan</button>
-        <button class="question-chip" onclick="askQuestion('PILLARS', this)">⭐ Masalah PILLARS & Sukarelawan</button>
-        <button class="question-chip" onclick="askQuestion('Pengangkutan', this)">🚌 Tempahan Bas & Van</button>
-        <button class="question-chip" onclick="askQuestion('Kelab Inovasi', this)">💡 Aktiviti, Kelab & Inovasi</button>
-        <button class="question-chip" onclick="askQuestion('MPP', this)">👑 MPP & Kepimpinan</button>
-        <button class="question-chip" onclick="askQuestion('Cenderahati', this)">👕 Cenderahati, Baju & Peralatan</button>
-        <button class="question-chip" onclick="askQuestion('Protokol', this)">🔊 Protokol, PA System & Grafik</button>
-        <button class="question-chip" onclick="askQuestion('Kewangan', this)">💰 Hal Ehwal Kewangan</button>
-      </div>
-
     </div>
-  </section>
+  </div>
 
-  <!-- 3. PAPARAN HASIL CARIAN & SENARAI PEGAWAI (Betul-betul bawah ruang pertanyaan, atas Pengurusan Tertinggi!) -->
-  <main class="container staff-directory-stream" id="staff-directory-section">
-    <div class="directory-top-meta">
-      <div>
-        <h3 id="current-view-title">Senarai Pegawai & Kaunter Bertugas</h3>
-        <p class="directory-sub-hint">Klik <b>"Lihat Senarai Penuh Urusan"</b> pada kad untuk semak butiran lengkap, atau klik emel untuk berhubung.</p>
-      </div>
-      <span id="match-count-badge" class="count-pill">18 Pegawai</span>
-    </div>
-
-    <!-- Big Portrait Cards Grid -->
-    <div class="vibe-cards-grid" id="staff-grid">
-      <!-- Injected dynamically via app.js -->
-    </div>
-
-    <!-- Empty Search State -->
-    <div id="no-match-box" class="empty-vibe-state" style="display: none;">
-      <div class="empty-icon-wrap"><i data-lucide="sparkles"></i></div>
-      <h4>Harap Maaf tiada padanan ditemui.</h4>
-      <p>Cuba kata kunci ringkas seperti <b>PTPTN</b>, <b>Pillars</b>, <b>Baju</b>, <b>PA System</b>, <b>Bilik</b>, <b>Zakat</b>, <b>Bas</b>, atau klik butang di bawah untuk lihat semua pegawai.</p>
-      <button class="btn-reset-search" onclick="clearVibeSearch()">✨ Papar Semua Pegawai</button>
-    </div>
-  </main>
-
-  <!-- 4. PENGURUSAN TERTINGGI JHEP (Di bawah paparan carian / senarai pegawai) -->
-  <section class="section-tertinggi" id="top-leadership">
-    <div class="container">
-      <div class="section-heading-center">
-        <span class="vibe-badge"><i data-lucide="crown" class="icon-xs"></i> Kepimpinan Utama</span>
-        <h2>Pengurusan Tertinggi JHEP</h2>
-        <div class="center-gold-line"></div>
-        <p>Barisan peneraju utama Jabatan Hal Ehwal Pelajar & Alumni Universiti Malaysia Perlis</p>
-      </div>
-
-      <!-- Featured Top 4 Spotlight Grid -->
-      <div class="tertinggi-grid">
-        <!-- Pengarah (Main Centerpiece Shine) -->
-        <div class="lead-vibe-card main-lead">
-          <div class="shine-aura gold-aura"></div>
-          <div class="lead-rank-ribbon gold">
-            <i data-lucide="award" class="icon-xs"></i> Pengarah JHEP
-          </div>
-          <div class="lead-img-showcase">
-            <img src="cropped-images/lead-syahmie.png" alt="Prof. Madya Ir. Ts. Dr. Mohamad Syahmie Bin Mohamad Rasidi">
-          </div>
-          <div class="lead-text">
-            <h3>Prof. Madya Ir. Ts. Dr. Mohamad Syahmie</h3>
-            <p class="lead-full-title">Bin Mohamad Rasidi</p>
-            <div class="lead-meta-stack">
-              <div class="lead-location">
-                <i data-lucide="map-pin" class="icon-xs"></i> Aras 1, Pejabat JHEP
-              </div>
-              <a href="mailto:syahmie@unimap.edu.my" class="lead-email-pill">
-                <i data-lucide="mail" class="icon-xs"></i> syahmie@unimap.edu.my
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Timbalan Pengarah 1 -->
-        <div class="lead-vibe-card">
-          <div class="shine-aura warm-aura"></div>
-          <div class="lead-rank-ribbon charcoal">
-            Timbalan Pengarah 1
-          </div>
-          <div class="lead-img-showcase">
-            <img src="cropped-images/lead-ashikin.png" alt="Cik Nurul Ashikin Binti Abdul Halim">
-          </div>
-          <div class="lead-text">
-            <h3>Cik Nurul Ashikin</h3>
-            <p class="lead-full-title">Binti Abdul Halim</p>
-            <div class="lead-meta-stack">
-              <div class="lead-location">
-                <i data-lucide="map-pin" class="icon-xs"></i> Aras Bawah, Pejabat JHEP
-              </div>
-              <a href="mailto:nurulashikin@unimap.edu.my" class="lead-email-pill">
-                <i data-lucide="mail" class="icon-xs"></i> nurulashikin@unimap.edu.my
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Timbalan Pengarah 2 -->
-        <div class="lead-vibe-card">
-          <div class="shine-aura warm-aura"></div>
-          <div class="lead-rank-ribbon charcoal">
-            Timbalan Pengarah 2
-          </div>
-          <div class="lead-img-showcase">
-            <img src="cropped-images/lead-abdullah.png" alt="Dr. Abdullah Bin Abdul Samat">
-          </div>
-          <div class="lead-text">
-            <h3>Dr. Abdullah</h3>
-            <p class="lead-full-title">Bin Abdul Samat</p>
-            <div class="lead-meta-stack">
-              <div class="lead-location">
-                <i data-lucide="map-pin" class="icon-xs"></i> Aras Bawah, Pejabat JHEP
-              </div>
-              <a href="mailto:abdullahsamat@unimap.edu.my" class="lead-email-pill">
-                <i data-lucide="mail" class="icon-xs"></i> abdullahsamat@unimap.edu.my
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Timbalan Pendaftar -->
-        <div class="lead-vibe-card">
-          <div class="shine-aura warm-aura"></div>
-          <div class="lead-rank-ribbon slate">
-            Timbalan Pendaftar
-          </div>
-          <div class="lead-img-showcase">
-            <img src="cropped-images/lead-hasrul.png" alt="En. Hasrul Nizam Bin Halim">
-          </div>
-          <div class="lead-text">
-            <h3>En. Hasrul Nizam</h3>
-            <p class="lead-full-title">Bin Halim</p>
-            <div class="lead-meta-stack">
-              <div class="lead-location">
-                <i data-lucide="map-pin" class="icon-xs"></i> Aras 1, Pejabat JHEP
-              </div>
-              <a href="mailto:hasrulnizam@unimap.edu.my" class="lead-email-pill">
-                <i data-lucide="mail" class="icon-xs"></i> hasrulnizam@unimap.edu.my
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Always-Accessible Vertical Up/Down Mode Switcher at BOTTOM RIGHT (No green dot) -->
+  <div id="floating-mode-dock" class="floating-mode-dock" role="group" aria-label="Tukar paparan Direktori atau AI Chatbot">
+    <button type="button" id="dockBtnDirectory" class="dock-mode-btn active" onclick="switchHubMode('directory', false)" title="Direktori Pegawai (PIC)">
+      <i data-lucide="users" class="icon-xs"></i>
+      <span>Direktori</span>
+    </button>
+    <div class="dock-divider"></div>
+    <button type="button" id="dockBtnChatbot" class="dock-mode-btn" onclick="switchHubMode('chatbot', false)" title="TanyaJHEP AI Chatbot">
+      <i data-lucide="bot" class="icon-xs"></i>
+      <span>Tanya AI</span>
+    </button>
+  </div>
 
   <!-- Toast Notification for Copy Email -->
   <div id="copy-toast" class="copy-toast">
@@ -328,22 +482,7 @@
     <span id="copy-toast-text">Emel berjaya disalin!</span>
   </div>
 
-  <!-- Modern Footer Matching e-JHEP Theme -->
-  <footer class="simple-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand-text">
-        <strong>JHEP ASSIST • JABATAN HAL EHWAL PELAJAR & ALUMNI (JHEP)</strong>
-        <span>Universiti Malaysia Perlis (UniMAP) • Isnin – Jumaat (8.30 pg – 4.30 ptg) • Sabtu & Ahad Cuti</span>
-      </div>
-      <div class="footer-right-col">
-        <a href="mailto:jhep@unimap.edu.my" class="footer-email-link">
-          <i data-lucide="mail" class="icon-xs"></i> jhep@unimap.edu.my
-        </a>
-        <span class="footer-vibe">Salam • Mesra • Senyum</span>
-      </div>
-    </div>
-  </footer>
-
+  <script src="knowledge_base.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

@@ -360,6 +360,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderStaffList(STAFF_DATA);
   updateLiveOperatingStatus();
   setInterval(updateLiveOperatingStatus, 60000);
+  initAiChatbot();
   lucide.createIcons();
 });
 
@@ -381,8 +382,8 @@ function updateLiveOperatingStatus() {
     const badge = document.getElementById("operasi-live-badge");
 
     let state = "closed"; // 'open' | 'break' | 'closed'
-    let heroLabel = "Kaunter Ditutup • Buka Isnin–Jumaat (8.30 pg – 4.30 ptg)";
-    let badgeLabel = "🔴 Kaunter Ditutup Sekarang (Buka Isnin – Jumaat, 8.30 pg – 4.30 ptg)";
+    let heroLabel = "Kaunter JHEP telah ditutup • Buka Isnin–Jumaat (8.30 pg – 4.30 ptg)";
+    let badgeLabel = "🔴 Kaunter JHEP telah ditutup (Buka Isnin – Jumaat, 8.30 pg – 4.30 ptg)";
 
     if (day >= 1 && day <= 4) {
       // Monday - Thursday
@@ -428,6 +429,11 @@ function updateLiveOperatingStatus() {
     if (badge) {
       badge.textContent = badgeLabel;
       badge.className = "operasi-live-badge is-" + state;
+    }
+    const welcomeStatus = document.getElementById("welcome-live-status");
+    if (welcomeStatus) {
+      welcomeStatus.textContent = badgeLabel;
+      welcomeStatus.className = "welcome-status-banner is-" + state;
     }
   } catch (e) {
     // Fallback static label if timezone parsing not supported
@@ -686,32 +692,16 @@ function tokenMatchesDoc(token, doc) {
   return bestWeight;
 }
 
-function handleQuickSearch(query, resetChips = true) {
-  const clean = query.trim().toLowerCase();
-  const clearBtn = document.getElementById("btn-clear-vibe");
+function computeMatchingStaff(query) {
+  const clean = (query || "").trim().toLowerCase();
+  if (!clean) return STAFF_DATA;
 
-  if (resetChips) {
-    document.querySelectorAll(".question-chip").forEach((chip, idx) => {
-      chip.classList.toggle("active", !clean && idx === 0);
-    });
-  }
-
-  if (!clean) {
-    clearBtn.style.display = "none";
-    renderStaffList(STAFF_DATA, "Semua Pegawai & Kaunter Bertugas");
-    return;
-  }
-
-  clearBtn.style.display = "flex";
-
-  // Tokenize user input
   const rawTokens = clean.split(/[^a-z0-9]+/).filter(Boolean);
   let meaningfulTokens = rawTokens.filter(t => !SEARCH_STOP_WORDS.has(t));
   if (meaningfulTokens.length === 0) {
     meaningfulTokens = rawTokens;
   }
 
-  // Separate specific topic nouns/names from generic action words (e.g. "pinjam", "semak", "tempah")
   const topicTokens = meaningfulTokens.filter(t => !GENERIC_ACTION_WORDS.has(t));
   const actionTokens = meaningfulTokens.filter(t => GENERIC_ACTION_WORDS.has(t));
 
@@ -723,12 +713,10 @@ function handleQuickSearch(query, resetChips = true) {
     let matchedTopicCount = 0;
     let matchedActionCount = 0;
 
-    // Full phrase bonus if exact phrase appears
     if (clean.length >= 3 && doc.fullText.includes(clean)) {
       score += 50;
     }
 
-    // Score specific topic keywords
     for (const tok of topicTokens) {
       const w = tokenMatchesDoc(tok, doc);
       if (w > 0) {
@@ -737,7 +725,6 @@ function handleQuickSearch(query, resetChips = true) {
       }
     }
 
-    // Score generic action words
     for (const tok of actionTokens) {
       const w = tokenMatchesDoc(tok, doc);
       if (w > 0) {
@@ -746,28 +733,47 @@ function handleQuickSearch(query, resetChips = true) {
       }
     }
 
-    // Determine if this staff card should appear:
-    // - If user typed specific topic keywords (e.g., "pa system" in "nak pinjam pa system"),
-    //   require AT LEAST ONE topic keyword to match so unrelated "pinjaman" cards don't pollute results!
-    // - If user ONLY typed generic action words (e.g., just "pinjam" or "tempah"), match on action words!
     const isMatch = topicTokens.length > 0
       ? matchedTopicCount > 0
       : (matchedActionCount > 0 || score > 0);
 
     if (isMatch) {
-      // Extra synergy bonus when multiple topic keywords match together (e.g. "pa" + "system")
       score += matchedTopicCount * 20;
       scoredMatches.push({ item, score, originalIndex });
     }
   });
 
-  // Sort by highest relevance score first, preserving original order on ties
   scoredMatches.sort((a, b) => b.score - a.score || a.originalIndex - b.originalIndex);
+  return scoredMatches.map(m => m.item);
+}
 
-  renderStaffList(
-    scoredMatches.map(m => m.item),
-    `Hasil Carian JHEP Assist: "${query}"`
-  );
+function handleQuickSearch(query, resetChips = true) {
+  const clean = query.trim().toLowerCase();
+  const clearBtn = document.getElementById("btn-clear-vibe");
+  const bridgeEl = document.getElementById("ask-ai-bridge");
+  const bridgePreview = document.getElementById("bridge-query-preview");
+
+  if (resetChips) {
+    document.querySelectorAll(".question-chip").forEach((chip, idx) => {
+      chip.classList.toggle("active", !clean && idx === 0);
+    });
+  }
+
+  if (!clean) {
+    if (clearBtn) clearBtn.style.display = "none";
+    if (bridgeEl) bridgeEl.style.display = "none";
+    renderStaffList(STAFF_DATA, "Semua Pegawai & Kaunter Bertugas");
+    return;
+  }
+
+  if (clearBtn) clearBtn.style.display = "flex";
+  if (bridgeEl && bridgePreview) {
+    bridgePreview.textContent = `"${query.trim()}"`;
+    bridgeEl.style.display = "block";
+  }
+
+  const matches = computeMatchingStaff(query);
+  renderStaffList(matches, `Hasil Carian JHEP Assist: "${query}"`);
 }
 
 /**
@@ -775,10 +781,496 @@ function handleQuickSearch(query, resetChips = true) {
  */
 function clearVibeSearch() {
   const input = document.getElementById("vibe-search-input");
-  input.value = "";
-  document.getElementById("btn-clear-vibe").style.display = "none";
+  if (input) input.value = "";
+  const clearBtn = document.getElementById("btn-clear-vibe");
+  if (clearBtn) clearBtn.style.display = "none";
+  const bridgeEl = document.getElementById("ask-ai-bridge");
+  if (bridgeEl) bridgeEl.style.display = "none";
   document.querySelectorAll(".question-chip").forEach((chip, idx) => {
     chip.classList.toggle("active", idx === 0);
   });
   renderStaffList(STAFF_DATA, "Semua Pegawai & Kaunter Bertugas");
+}
+
+// ============================================================================
+// UNIFIED HUB MODE SWITCHER & TANYAJHEP AI CHATBOT ENGINE (Bilingual + PIC Escalation)
+// ============================================================================
+
+let aiCurrentLang = "ms";
+let aiHasStartedChat = false;
+
+const AI_COPY = {
+  ms: {
+    newChat: "+ Perbualan Baharu",
+    topicsHeader: "Soalan Lazim HEPA & Pembiayaan",
+    emergencyPicLabel: "Kecemasan / Rujuk PIC Kebajikan",
+    viewAllPicLabel: "Lihat Semua 18 Pegawai (PIC)",
+    modelSubtag: "Pembantu Pintar HEPA & Pembiayaan UniMAP",
+    placeholder: "Tanya tentang PTPTN, Kelas Pertama 2026, Zakat/GL Hospital, PILLARS, Baju Korporat, PA System...",
+    caption: "Pembantu AI Rasmi HEPA UniMAP • Setiap jawapan disertakan pautan terus kepada Pegawai Bertanggungjawab (PIC) jika perlukan bantuan lanjut / kecemasan.",
+    heroBadge: "PEMBANTU AI PINTAR HEPA UNIMAP",
+    heroTitle: "Apa yang boleh saya bantu hari ini?",
+    heroSub: "Tanya apa sahaja mengenai HEPA, PTPTN, Kebajikan/Kecemasan, PILLARS & Kemudahan JHEP dalam Bahasa Melayu atau English.",
+    picHeader: "👤 Pegawai Bertanggungjawab (PIC) — Rujuk Jika Kecemasan / Info Lanjut:",
+    picJumpBtn: "Lihat Penuh di Direktori PIC →",
+    picAllBtn: "Lihat Semua 18 PIC JHEP →",
+    starters: [
+      {
+        title: "🎓 Permohonan PTPTN, WPP (RM1,500) & Bank RHB",
+        sub: "Jadual mohon, SSPN Prime (RM20), Tandatangan Digital RM25 & Kelas Pertama 2026",
+        q: "Bagaimanakah cara memohon pinjaman PTPTN?"
+      },
+      {
+        title: "🚨 Kecemasan, GL Hospital, Zakat & e-Tabung",
+        sub: "Bantuan Ihsan masuk wad, surat jaminan hospital kerajaan, insurans, FoodBank & khairat",
+        q: "Bagaimana cara memohon bantuan kecemasan, Bantuan Ihsan (sakit/masuk wad), Surat Jaminan (GL) Hospital, tuntutan insurans atau khairat kematian?"
+      },
+      {
+        title: "⭐ Masalah Rekod PILLARS & Tahun Akhir",
+        sub: "Pillars tak masuk sistem, hilang, gantian final year & pindahan Diploma ke Ijazah",
+        q: "Bagaimana menyelesaikan masalah rekod PILLARS tidak dikemaskini, hilang, PILLARS gantian tahun akhir, atau pindahan PILLARS Diploma ke Ijazah?"
+      },
+      {
+        title: "👕 Jaket/Baju Korporat, PA System & Tempahan Bilik",
+        sub: "Ambil pakaian rasmi pelajar, pinjam PA System/peralatan, semak banner & bilik gerakan",
+        q: "Bagaimana cara mengambil pakaian rasmi pelajar (jaket/baju korporat), menempah Bilik Gerakan/Mesyuarat, atau meminjam peralatan JHEP?"
+      }
+    ],
+    greetingReply: `Waalaikumussalam dan salam sejahtera! 👋\n\nSaya ialah **TanyaJHEP AI**, pembantu pintar bersepadu **HEPA UniMAP**. Anda boleh bertanya kepada saya mengenai:\n- **Pembiayaan & PTPTN**: Permohonan myPTPTN, bank panel **RHB Islamic**, **Tandatangan Digital (RM25)**, **WPP (RM1,500)**, **BAeK eKasih**, **Dermasiswa SULUNG**, serta **Pengecualian Kelas Pertama (Syarat 2026)**.\n- **Kebajikan & Kecemasan**: **Surat Jaminan (GL) Hospital**, **Bantuan Ihsan (Sakit/Masuk Wad)**, Zakat, **e-Tabung**, FoodBank, Khairat Kematian & Skim Kaca Mata.\n- **PILLARS, Aktiviti & Kemudahan**: Penyelesaian **7 isu PILLARS**, tempahan **Bas/Van**, kelab/inovasi/MPP, **Pakaian Rasmi (Jaket/Baju)**, **PA System**, Protokol VIP & Bilik Gerakan.\n\n💡 *Setiap jawapan saya turut memaparkan Pegawai Bertanggungjawab (PIC) jika anda memerlukan rujukan lanjut atau kecemasan!*`,
+    fallbackWithPic: (q) => `Berikut ialah maklumat **Pegawai Bertanggungjawab (PIC)** di JHEP UniMAP yang paling berkaitan dengan pertanyaan anda mengenai **"${q}"**.\n\nSila rujuk kad PIC di bawah untuk hadir ke kaunter atau berhubung terus melalui emel rasmi (terutamanya bagi kes kecemasan):`,
+    fallbackNoPic: (q) => `Harap maaf, saya belum mempunyai artikel khusus bagi **"${q}"**.\n\nAnda boleh:\n1. Cuba kata kunci seperti *PTPTN*, *Kelas Pertama 2026*, *WPP RM1500*, *GL Hospital*, *e-Tabung*, *PILLARS*, *Baju Korporat*, *PA System*, atau *Tempahan Bas*.\n2. Atau klik butang di bawah untuk menyemak terus **Senarai 18 Pegawai Bertanggungjawab (PIC)** di Direktori JHEP Assist:`
+  },
+  en: {
+    newChat: "+ New Conversation",
+    topicsHeader: "HEPA & Financial Aid FAQs",
+    emergencyPicLabel: "Emergency / Welfare PIC",
+    viewAllPicLabel: "View All 18 JHEP Officers (PIC)",
+    modelSubtag: "UniMAP HEPA & Financial Aid Smart Assistant",
+    placeholder: "Ask about PTPTN, First Class 2026, Hospital GL / Zakat, PILLARS, Corporate Shirt, PA System...",
+    caption: "Official UniMAP HEPA AI Assistant • Every reply includes direct Person-In-Charge (PIC) contacts for further help or emergencies.",
+    heroBadge: "UNIMAP HEPA SMART AI ASSISTANT",
+    heroTitle: "How can I help you today?",
+    heroSub: "Ask anything about HEPA, PTPTN, Student Welfare/Emergencies, PILLARS & JHEP Facilities in English or Bahasa Melayu.",
+    picHeader: "👤 Person-In-Charge (PIC) — Contact for Emergencies / Further Info:",
+    picJumpBtn: "View Full PIC Card in Directory →",
+    picAllBtn: "View All 18 JHEP PICs →",
+    starters: [
+      {
+        title: "🎓 PTPTN Application, WPP (RM1,500) & RHB Bank",
+        sub: "Application schedule, SSPN Prime (RM20), Digital Signature RM25 & First Class 2026",
+        q: "How do I apply for a PTPTN education loan online?"
+      },
+      {
+        title: "🚨 Emergency Aid, Hospital GL, Zakat & e-Tabung",
+        sub: "Ward admission aid, government hospital GL, accident insurance, FoodBank & bereavement",
+        q: "How do I apply for emergency aid, Hospital Guarantee Letter (GL), medical/accident insurance claims, or bereavement aid?"
+      },
+      {
+        title: "⭐ PILLARS System Issues & Final-Year Transfer",
+        sub: "Unupdated/missing PILLARS, final-year replacement & Diploma-to-Degree transfer",
+        q: "How do I resolve missing/unupdated PILLARS records, final-year replacement PILLARS, or transferring Diploma PILLARS to Degree?"
+      },
+      {
+        title: "👕 Student Jacket/Shirt, PA System & Room Booking",
+        sub: "Official attire collection, PA System/equipment loan, banner vetting & meeting rooms",
+        q: "How do I collect official student attire (jacket/corporate shirt), book JHEP meeting rooms, or borrow JHEP equipment?"
+      }
+    ],
+    greetingReply: `Hello and Salam Sejahtera! 👋\n\nI am **TanyaJHEP AI**, the unified **UniMAP HEPA Smart Assistant**. Feel free to ask me about:\n- **Financial Aid & PTPTN**: myPTPTN applications, **RHB Islamic** panel bank, **Digital Signature (RM25)**, **WPP (RM1,500)**, **BAeK eKasih**, **Dermasiswa SULUNG**, and **First Class Exemption (2026 Rules)**.\n- **Welfare & Emergencies**: **Hospital Guarantee Letters (GL)**, **Ward Admission Aid (Bantuan Ihsan)**, Zakat, **e-Tabung**, FoodBank, Bereavement Aid & Spectacles Scheme.\n- **PILLARS, Activities & Facilities**: Resolving **7 PILLARS issues**, **Bus/Van** bookings, clubs/MPP, **Official Attire (Jacket/Shirt)**, **PA Systems**, VIP Protocol & Meeting Rooms.\n\n💡 *Every reply automatically links you to the exact Person-In-Charge (PIC) if you need further assistance or emergency support!*`,
+    fallbackWithPic: (q) => `Here are the **Person-In-Charge (PIC)** officers at JHEP UniMAP most relevant to your inquiry about **"${q}"**.\n\nPlease refer to the PIC card(s) below to visit the counter or reach out via official email (especially for urgent cases):`,
+    fallbackNoPic: (q) => `Sorry, I couldn't find a specific article for **"${q}"**.\n\nYou can:\n1. Try asking with keywords like *PTPTN*, *First Class 2026*, *WPP RM1500*, *Hospital GL*, *e-Tabung*, *PILLARS*, *Corporate Shirt*, *PA System*, or *Bus Booking*.\n2. Or click below to browse all **18 Person-In-Charge (PIC)** officers in the JHEP Assist Directory:`
+  }
+};
+
+let currentHubMode = "directory";
+
+function closeWelcomeModal() {
+  const modal = document.getElementById("welcome-entry-modal");
+  if (modal) modal.classList.add("hidden");
+}
+
+function selectInitialMode(mode) {
+  closeWelcomeModal();
+  switchHubMode(mode, false);
+}
+
+function toggleHubMode() {
+  switchHubMode(currentHubMode === "chatbot" ? "directory" : "chatbot", false);
+}
+
+function toggleMobileFaqDrawer(open) {
+  const drawer = document.getElementById("aiSidebarDrawer");
+  const backdrop = document.getElementById("aiSidebarBackdrop");
+  if (!drawer || !backdrop) return;
+  const shouldOpen = typeof open === "boolean" ? open : !drawer.classList.contains("drawer-open");
+  drawer.classList.toggle("drawer-open", shouldOpen);
+  backdrop.classList.toggle("open", shouldOpen);
+}
+
+function switchHubMode(mode, shouldScroll = false) {
+  const isChat = mode === "chatbot";
+  currentHubMode = isChat ? "chatbot" : "directory";
+
+  const dirWrap = document.getElementById("view-directory-wrapper");
+  const chatWrap = document.getElementById("view-chatbot-wrapper");
+  const modeDock = document.getElementById("floating-mode-dock");
+  const dockDir = document.getElementById("dockBtnDirectory");
+  const dockChat = document.getElementById("dockBtnChatbot");
+
+  // Always close mobile FAQ drawer & welcome modal when switching modes
+  toggleMobileFaqDrawer(false);
+  closeWelcomeModal();
+
+  if (dirWrap) dirWrap.style.display = isChat ? "none" : "block";
+  if (chatWrap) chatWrap.style.display = isChat ? "block" : "none";
+
+  // Keep bottom-right vertical Up/Down dock ALWAYS visible & highlight active mode
+  if (modeDock) modeDock.classList.toggle("in-chat-mode", isChat);
+  if (dockDir) dockDir.classList.toggle("active", !isChat);
+  if (dockChat) dockChat.classList.toggle("active", isChat);
+
+  // Lock background page scrolling while inside full-screen chatbot
+  if (typeof document !== "undefined" && document.body) {
+    document.body.style.overflow = isChat ? "hidden" : "";
+  }
+
+  if (isChat) {
+    setTimeout(() => {
+      const input = document.getElementById("aiUserInput");
+      if (input && window.innerWidth > 768) input.focus();
+    }, 200);
+  } else if (shouldScroll) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  if (typeof lucide !== "undefined") {
+    lucide.createIcons();
+  }
+}
+
+function bridgeSearchToChatbot() {
+  const searchInput = document.getElementById("vibe-search-input");
+  const q = searchInput ? searchInput.value.trim() : "";
+  switchHubMode("chatbot", true);
+  if (q) {
+    setTimeout(() => askAiChatbot(q), 180);
+  }
+}
+
+function escalateToPicDirectory(picFilterQuery) {
+  switchHubMode("directory", false);
+  const searchInput = document.getElementById("vibe-search-input");
+  if (picFilterQuery) {
+    if (searchInput) searchInput.value = picFilterQuery;
+    handleQuickSearch(picFilterQuery, true);
+  } else {
+    clearVibeSearch();
+  }
+
+  const dirSec = document.getElementById("staff-directory-section");
+  if (dirSec) {
+    dirSec.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  // Highlight matched PIC cards with a subtle golden spotlight pulse
+  setTimeout(() => {
+    document.querySelectorAll("#staff-grid .simple-staff-card").forEach(card => {
+      card.classList.add("pic-spotlight-pulse");
+      setTimeout(() => card.classList.remove("pic-spotlight-pulse"), 1800);
+    });
+  }, 250);
+}
+
+function renderMarkdownClean(md) {
+  if (!md) return "";
+  let html = md
+    .replace(/^###\s?(.*$)/gim, "<h3>$1</h3>")
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*(.*?)\*/g, "<em>$1</em>");
+
+  const lines = html.split("\n");
+  let out = "";
+  let inUl = false;
+  let inOl = false;
+
+  lines.forEach(line => {
+    const t = line.trim();
+    if (/^\d+[\.\)]\s+/.test(t)) {
+      if (inUl) { out += "</ul>"; inUl = false; }
+      if (!inOl) { out += "<ol>"; inOl = true; }
+      out += `<li>${t.replace(/^\d+[\.\)]\s+/, "")}</li>`;
+    } else if (/^[-•]\s+/.test(t)) {
+      if (inOl) { out += "</ol>"; inOl = false; }
+      if (!inUl) { out += "<ul>"; inUl = true; }
+      out += `<li>${t.replace(/^[-•]\s+/, "")}</li>`;
+    } else {
+      if (inUl) { out += "</ul>"; inUl = false; }
+      if (inOl) { out += "</ol>"; inOl = false; }
+      if (t.startsWith("<h3>")) {
+        out += t;
+      } else if (t.length > 0) {
+        out += `<p>${t}</p>`;
+      }
+    }
+  });
+  if (inUl) out += "</ul>";
+  if (inOl) out += "</ol>";
+  return out;
+}
+
+function initAiChatbot() {
+  if (typeof UNIT_PEMBIAYAAN_DATA === "undefined") return;
+  setAiLanguage("ms");
+
+  const form = document.getElementById("aiComposerForm");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const input = document.getElementById("aiUserInput");
+      if (!input || !input.value.trim()) return;
+      askAiChatbot(input.value);
+      input.value = "";
+    });
+  }
+}
+
+function setAiLanguage(lang) {
+  aiCurrentLang = lang;
+  const btnMs = document.getElementById("aiBtnMs");
+  const btnEn = document.getElementById("aiBtnEn");
+  if (btnMs) btnMs.classList.toggle("active", lang === "ms");
+  if (btnEn) btnEn.classList.toggle("active", lang === "en");
+
+  const c = AI_COPY[lang];
+  const setTxt = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  setTxt("aiNewChatLabel", c.newChat);
+  setTxt("aiTopicsHeader", c.topicsHeader);
+  setTxt("aiEmergencyPicLabel", c.emergencyPicLabel);
+  setTxt("aiViewAllPicLabel", c.viewAllPicLabel);
+  setTxt("aiModelSubtag", c.modelSubtag);
+  setTxt("aiComposerCaption", c.caption);
+
+  const input = document.getElementById("aiUserInput");
+  if (input) input.placeholder = c.placeholder;
+
+  renderAiSidebarFAQs();
+  if (!aiHasStartedChat) {
+    renderAiHeroEmptyState();
+  }
+}
+
+function renderAiSidebarFAQs() {
+  const container = document.getElementById("aiSidebarTopics");
+  if (!container || typeof UNIT_PEMBIAYAAN_DATA === "undefined") return;
+
+  // Put HEPA-wide featured items + Unit Pembiayaan featured items in a balanced order
+  const featured = UNIT_PEMBIAYAAN_DATA.filter(item => item.featuredFaq);
+  const hepaFeatured = featured.filter(item => item.id && item.id.startsWith("hepa_"));
+  const financeFeatured = featured.filter(item => !item.id || !item.id.startsWith("hepa_"));
+  const ordered = [...hepaFeatured, ...financeFeatured];
+
+  container.innerHTML = ordered.map(item => {
+    const title = (item.faqLabel && (item.faqLabel[aiCurrentLang] || item.faqLabel.ms)) || item.soalan_utama;
+    const q = aiCurrentLang === "en" ? item.soalan_en : item.soalan_utama;
+    const safeQ = q.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+    return `
+      <button type="button" class="ai-faq-btn" onclick="toggleMobileFaqDrawer(false); askAiChatbot('${safeQ}')">
+        <span class="ai-faq-q">Q.</span>
+        <span>${title}</span>
+      </button>
+    `;
+  }).join("");
+}
+
+function renderAiHeroEmptyState() {
+  const col = document.getElementById("aiChatColumn");
+  if (!col) return;
+  const c = AI_COPY[aiCurrentLang];
+  col.innerHTML = `
+    <div class="ai-hero-greeting">
+      <div class="ai-hero-badge">✨ ${c.heroBadge}</div>
+      <h3>${c.heroTitle}</h3>
+      <p>${c.heroSub}</p>
+      <div class="ai-starter-grid">
+        ${c.starters.map(s => {
+          const safeQ = s.q.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+          return `
+            <div class="ai-starter-card" onclick="askAiChatbot('${safeQ}')">
+              <div class="ai-starter-title">${s.title}</div>
+              <div class="ai-starter-sub">${s.sub}</div>
+            </div>
+          `;
+        }).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function startNewAiChat() {
+  aiHasStartedChat = false;
+  if (typeof lastMatchedItem !== "undefined") {
+    lastMatchedItem = null;
+  }
+  renderAiHeroEmptyState();
+}
+
+function findPicsForChatbotReply(kbItem, rawQuery) {
+  // 1. Check if the user's raw query pinpoints specific PICs directly
+  const directMatches = computeMatchingStaff(rawQuery);
+
+  if (kbItem) {
+    // If kbItem explicitly specifies picQuery === "", it's general JHEP info (like Waktu Operasi)
+    if (kbItem.picQuery === "") {
+      return { pics: directMatches.length <= 4 ? directMatches.slice(0, 3) : [], filterKey: "" };
+    }
+    const filterKey = kbItem.picQuery || "PTPTN";
+    const kbPics = computeMatchingStaff(filterKey);
+    return { pics: kbPics.slice(0, 3), filterKey };
+  }
+
+  // Fallback query: use smart PIC matching on rawQuery!
+  if (directMatches.length > 0 && directMatches.length < STAFF_DATA.length) {
+    return { pics: directMatches.slice(0, 3), filterKey: rawQuery };
+  }
+  return { pics: [], filterKey: "" };
+}
+
+function buildPicHandoffHtml(pics, filterKey, lang) {
+  const c = AI_COPY[lang] || AI_COPY.ms;
+  const safeFilter = (filterKey || "").replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+
+  if (!pics || pics.length === 0) {
+    return `
+      <div class="ai-pic-handoff-box">
+        <div class="ai-pic-handoff-header" style="margin-bottom:0;">
+          <strong>${c.picHeader}</strong>
+          <button type="button" class="btn-jump-pic-dir" onclick="escalateToPicDirectory('')">${c.picAllBtn}</button>
+        </div>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="ai-pic-handoff-box">
+      <div class="ai-pic-handoff-header">
+        <strong>${c.picHeader}</strong>
+        <button type="button" class="btn-jump-pic-dir" onclick="escalateToPicDirectory('${safeFilter}')">${c.picJumpBtn}</button>
+      </div>
+      <div class="ai-pic-mini-list">
+        ${pics.map(p => `
+          <div class="ai-pic-mini-card">
+            ${p.photo
+              ? `<img src="${p.photo}" alt="${p.name}" class="ai-pic-mini-avatar">`
+              : `<div class="ai-pic-mini-fallback">${p.initials || "JH"}</div>`
+            }
+            <div class="ai-pic-mini-info">
+              <strong>${p.name}</strong>
+              <span>📍 ${p.location}</span>
+              <a href="mailto:${p.email}">✉️ ${p.email}</a>
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function askAiChatbot(text) {
+  const query = (text || "").trim();
+  if (!query || typeof searchKnowledgeBase === "undefined") return;
+
+  const col = document.getElementById("aiChatColumn");
+  const scroll = document.getElementById("aiChatScroll");
+  if (!col || !scroll) return;
+
+  if (!aiHasStartedChat) {
+    col.innerHTML = "";
+    aiHasStartedChat = true;
+  }
+
+  // 1. User Bubble
+  const userBubble = document.createElement("div");
+  userBubble.className = "ai-turn-user";
+  userBubble.textContent = query;
+  col.appendChild(userBubble);
+
+  // 2. Assistant Typing Turn
+  const assistantTurn = document.createElement("div");
+  assistantTurn.className = "ai-turn-assistant";
+  assistantTurn.innerHTML = `
+    <div class="ai-turn-avatar">AI</div>
+    <div class="ai-turn-body">
+      <div class="ai-typing-dots"><span></span><span></span><span></span></div>
+    </div>
+  `;
+  col.appendChild(assistantTurn);
+  scroll.scrollTop = scroll.scrollHeight;
+
+  // 3. Search Unified HEPA + Pembiayaan Knowledge Base
+  const result = searchKnowledgeBase(query, aiCurrentLang);
+  const lang = result.lang || aiCurrentLang;
+  const c = AI_COPY[lang] || AI_COPY.ms;
+
+  setTimeout(() => {
+    const bodyEl = assistantTurn.querySelector(".ai-turn-body");
+    let answerMd = "";
+    let sourceRef = "";
+    let links = [];
+    let relatedItems = [];
+    let picData = { pics: [], filterKey: "" };
+
+    if (result.type === "greeting") {
+      answerMd = c.greetingReply;
+      picData = { pics: [], filterKey: "" };
+    } else if (result.type === "match") {
+      const heading = lang === "en" ? result.item.soalan_en : result.item.soalan_utama;
+      const bodyText = lang === "en" ? result.item.jawapan_en : result.item.jawapan_rasmi;
+      answerMd = `### ${heading}\n${bodyText}`;
+      sourceRef = `JHEP UniMAP • ${result.item.section}`;
+      links = result.item.pautan || [];
+      relatedItems = result.related || [];
+      picData = findPicsForChatbotReply(result.item, query);
+    } else {
+      picData = findPicsForChatbotReply(null, query);
+      answerMd = picData.pics.length > 0 ? c.fallbackWithPic(query) : c.fallbackNoPic(query);
+    }
+
+    let html = renderMarkdownClean(answerMd);
+
+    if (links.length > 0) {
+      html += `<div class="ai-links-box">` +
+        links.map(l => `<a href="${l.url}" target="_blank" rel="noopener" class="ai-official-link">🔗 ${l.label} ↗</a>`).join("") +
+        `</div>`;
+    }
+
+    if (sourceRef) {
+      html += `<div class="ai-source-note">✓ ${sourceRef}</div>`;
+    }
+
+    // Inject Live PIC Handoff Card (so students can escalate to the responsible officer anytime!)
+    if (result.type !== "greeting") {
+      html += buildPicHandoffHtml(picData.pics, picData.filterKey, lang);
+    }
+
+    bodyEl.innerHTML = html;
+
+    // Related follow-up question pills
+    if (relatedItems.length > 0) {
+      const fRow = document.createElement("div");
+      fRow.className = "ai-followup-row";
+      relatedItems.slice(0, 2).forEach(rel => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "ai-followup-pill";
+        const qText = lang === "en" ? rel.soalan_en : rel.soalan_utama;
+        btn.textContent = "↪ " + qText;
+        btn.onclick = () => askAiChatbot(qText);
+        fRow.appendChild(btn);
+      });
+      bodyEl.appendChild(fRow);
+    }
+
+    scroll.scrollTop = scroll.scrollHeight;
+  }, 260);
 }
