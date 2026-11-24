@@ -931,6 +931,9 @@ function toggleMobileFaqDrawer(open) {
   const shouldOpen = typeof open === "boolean" ? open : !drawer.classList.contains("drawer-open");
   drawer.classList.toggle("drawer-open", shouldOpen);
   backdrop.classList.toggle("open", shouldOpen);
+  if (document.body) {
+    document.body.classList.toggle("faq-drawer-open", shouldOpen);
+  }
 }
 
 function switchHubMode(mode, shouldScroll = false) {

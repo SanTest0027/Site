@@ -2605,6 +2605,12 @@ body.is-embedded .ai-sidebar-footer {
     transform: translateX(0);
   }
 
+  /* Smoothly hide top mode pill while mobile FAQ drawer is open so + Perbualan Baharu is 100% clear */
+  body.faq-drawer-open .floating-mode-dock {
+    opacity: 0;
+    pointer-events: none;
+  }
+
   .ai-drawer-close-btn {
     display: inline-flex;
   }
