@@ -2570,6 +2570,11 @@ body.is-embedded .chatbot-fullscreen-wrapper {
   overscroll-behavior: contain;
 }
 
+/* Keep the chat input cleanly in the visible area above Google Sites' ~60px bottom iframe overflow */
+body.is-embedded .jhep-ai-composer-wrap {
+  padding-bottom: calc(68px + env(safe-area-inset-bottom));
+}
+
 /* ==========================================================================
    Mobile-First Responsive Polish (Phones & Tablets)
    ========================================================================== */
@@ -2789,6 +2794,10 @@ body.is-embedded .chatbot-fullscreen-wrapper {
 
   .jhep-ai-composer-wrap {
     padding: 8px 12px calc(8px + env(safe-area-inset-bottom)) 12px;
+  }
+
+  body.is-embedded .jhep-ai-composer-wrap {
+    padding-bottom: calc(70px + env(safe-area-inset-bottom));
   }
 
   .jhep-ai-caption {
