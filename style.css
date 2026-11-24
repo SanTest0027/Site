@@ -2141,11 +2141,11 @@ body {
   40%           { transform: scale(1.1); opacity: 1; }
 }
 
-/* Bottom Composer (Pinned cleanly at bottom with room for centered mode pill underneath) */
+/* Bottom Composer (Clean & tight at the bottom — no wasted white space!) */
 .jhep-ai-composer-wrap {
   background: var(--white);
   border-top: 1.5px solid var(--site-border);
-  padding: 10px 18px calc(68px + env(safe-area-inset-bottom)) 18px;
+  padding: 10px 18px calc(10px + env(safe-area-inset-bottom)) 18px;
   flex-shrink: 0;
 }
 
@@ -2448,35 +2448,36 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   Fixed Bottom-Center Horizontal Left/Right Mode Switcher (Outline Stays Put!)
+   Fixed TOP-CENTER Horizontal Left/Right Mode Switcher
+   (100% Immune to Google Sites Mobile Bottom Clipping — Outline NEVER Moves!)
    ========================================================================== */
 .floating-mode-dock {
   position: fixed;
-  bottom: calc(12px + env(safe-area-inset-bottom));
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 650;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 248px;
-  max-width: calc(100vw - 28px);
+  width: 244px;
+  max-width: calc(100vw - 24px);
   background: var(--charcoal-900);
   border: 2px solid var(--jhep-gold);
   border-radius: var(--radius-full);
-  padding: 4px;
-  box-shadow: 0 10px 28px rgba(24, 28, 34, 0.34);
+  padding: 3px;
+  box-shadow: 0 8px 24px rgba(24, 28, 34, 0.34);
 }
 
 /* Smoothly sliding gold pill indicator (glides Left <-> Right inside stationary outline) */
 .dock-active-pill {
   position: absolute;
-  top: 4px;
-  bottom: 4px;
-  left: 4px;
-  width: calc(50% - 4px);
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
   border-radius: var(--radius-full);
   background: linear-gradient(135deg, #fbbf24 0%, #e5a00d 100%);
-  box-shadow: 0 4px 12px rgba(229, 160, 13, 0.36);
+  box-shadow: 0 3px 10px rgba(229, 160, 13, 0.36);
   transform: translateX(0);
   transition: transform 0.28s cubic-bezier(0.34, 1.22, 0.64, 1);
   pointer-events: none;
@@ -2495,9 +2496,9 @@ body::-webkit-scrollbar,
   color: #d1d5db;
   border: none;
   font-family: var(--font-family);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 800;
-  padding: 8px 12px;
+  padding: 7px 12px;
   border-radius: var(--radius-full);
   cursor: pointer;
   display: inline-flex;
@@ -2520,9 +2521,25 @@ body::-webkit-scrollbar,
   color: var(--charcoal-900);
 }
 
-/* Give Directory footer breathing room above the centered bottom toggle */
-.simple-footer {
-  padding-bottom: 84px;
+/* Top clearance so the centered top toggle never overlaps hero text or chatbot topbar */
+.welcome-hero {
+  padding-top: 66px;
+}
+
+.jhep-ai-topbar {
+  padding-top: 58px;
+}
+
+/* Hide redundant Directory button in chatbot topbar since top-center toggle is always right there */
+.ai-topbar-dir-btn {
+  display: none;
+}
+
+/* Google Sites iframe embed fix: fit chatbot cleanly inside visible window beneath Google Sites header */
+body.is-embedded .chatbot-fullscreen-wrapper {
+  top: 0;
+  bottom: auto;
+  height: calc(100dvh - 58px);
 }
 
 /* ==========================================================================
@@ -2573,9 +2590,9 @@ body::-webkit-scrollbar,
     padding: 0 14px;
   }
 
-  /* Compact Hero for Mobile */
+  /* Compact Hero for Mobile (with clearance for top-center mode pill) */
   .welcome-hero {
-    padding: 24px 0 34px 0;
+    padding: 64px 0 34px 0;
   }
 
   .hero-big-title {
@@ -2727,15 +2744,11 @@ body::-webkit-scrollbar,
 
   /* Mobile Chatbot adjustments */
   .jhep-ai-topbar {
-    padding: 8px 12px;
-  }
-
-  .ai-topbar-dir-btn span {
-    display: none;
+    padding: 54px 12px 8px 12px;
   }
 
   .jhep-ai-scroll {
-    padding: 14px 12px 24px 12px;
+    padding: 12px 12px 18px 12px;
   }
 
   .ai-hero-greeting h3 {
@@ -2747,7 +2760,7 @@ body::-webkit-scrollbar,
   }
 
   .jhep-ai-composer-wrap {
-    padding: 8px 12px calc(62px + env(safe-area-inset-bottom)) 12px;
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom)) 12px;
   }
 
   .jhep-ai-caption {
@@ -2755,8 +2768,9 @@ body::-webkit-scrollbar,
   }
 
   .floating-mode-dock {
-    bottom: calc(10px + env(safe-area-inset-bottom));
-    width: 236px;
+    top: 8px;
+    bottom: auto;
+    width: 232px;
     padding: 3px;
   }
 
@@ -2768,8 +2782,14 @@ body::-webkit-scrollbar,
   }
 
   .dock-mode-btn {
-    padding: 7px 10px;
+    padding: 6px 10px;
     font-size: 0.74rem;
+  }
+
+  body.is-embedded .chatbot-fullscreen-wrapper {
+    top: 0;
+    bottom: auto;
+    height: calc(100dvh - 60px);
   }
 
   .welcome-modal-card {
