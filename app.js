@@ -1049,6 +1049,15 @@ function renderMarkdownClean(md) {
   return out;
 }
 
+function resetEmbeddedOuterScroll() {
+  if (!document.body || !document.body.classList.contains("is-embedded")) return;
+  const topAnchor = document.getElementById("iframe-top-anchor");
+  if (topAnchor) {
+    topAnchor.scrollIntoView({ behavior: "auto", block: "start" });
+  }
+  window.scrollTo(0, 0);
+}
+
 function initAiChatbot() {
   if (typeof UNIT_PEMBIAYAAN_DATA === "undefined") return;
   setAiLanguage("ms");
@@ -1064,12 +1073,15 @@ function initAiChatbot() {
       // On mobile, close keyboard after sending so the answer & top pill immediately snap back into full view
       if (window.innerWidth <= 768) {
         input.blur();
+        setTimeout(resetEmbeddedOuterScroll, 120);
+        setTimeout(resetEmbeddedOuterScroll, 320);
       }
     });
   }
   if (input) {
     input.addEventListener("blur", () => {
-      setTimeout(() => window.scrollTo(0, 0), 80);
+      setTimeout(resetEmbeddedOuterScroll, 120);
+      setTimeout(resetEmbeddedOuterScroll, 320);
     });
   }
 }

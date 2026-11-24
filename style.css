@@ -2796,6 +2796,16 @@ body.is-embedded .ai-sidebar-footer {
     padding: 54px 12px 8px 12px;
   }
 
+  /* Keep compact icon-only Directory button visible as a safety net while mobile keyboard is open */
+  .ai-topbar-dir-btn {
+    display: inline-flex;
+    padding: 6px 8px;
+  }
+
+  .ai-topbar-dir-btn span {
+    display: none;
+  }
+
   .jhep-ai-scroll {
     padding: 12px 12px 18px 12px;
   }
