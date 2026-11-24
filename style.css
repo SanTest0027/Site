@@ -2449,55 +2449,90 @@ body::-webkit-scrollbar,
 }
 
 /* ==========================================================================
-   Clean Inline Mode Switcher (No Floating Bar Colliding With Google Sites!)
+   Anti-Google-Sites Right-Edge Vertical Floating Side-Tab
+   (Anchored at 50% vertical center on the right edge — 100% IMMUNE to
+   Google Sites' top header & bottom overflow! Outline NEVER moves!)
    ========================================================================== */
-.inline-mode-bar {
-  position: relative;
-  z-index: 3;
-  display: inline-grid;
-  grid-template-columns: 1fr 1fr;
-  width: 276px;
-  max-width: 100%;
-  background: rgba(15, 20, 28, 0.85);
-  border: 1.5px solid var(--jhep-gold);
-  border-radius: var(--radius-full);
-  padding: 4px;
-  margin-bottom: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+.side-mode-tab {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 650;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  width: 50px;
+  background: rgba(24, 28, 34, 0.94);
+  backdrop-filter: blur(8px);
+  border: 2px solid var(--jhep-gold);
+  border-right: none;
+  border-radius: 16px 0 0 16px;
+  padding: 4px 3px 4px 4px;
+  box-shadow: -6px 6px 22px rgba(0, 0, 0, 0.28);
+  transition: opacity 0.2s ease;
 }
 
-.inline-mode-opt {
+/* Smoothly sliding gold pill indicator (glides Up <-> Down inside stationary side-tab) */
+.side-tab-pill {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 3px;
+  height: calc(50% - 4px);
+  border-radius: 11px 0 0 11px;
+  background: linear-gradient(135deg, #fbbf24 0%, #e5a00d 100%);
+  box-shadow: 0 3px 10px rgba(229, 160, 13, 0.4);
+  transform: translateY(0);
+  transition: transform 0.28s cubic-bezier(0.34, 1.22, 0.64, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.side-mode-tab.in-chat-mode .side-tab-pill {
+  transform: translateY(100%);
+}
+
+.side-tab-btn {
+  position: relative;
+  z-index: 1;
   background: transparent;
-  color: #e5e7eb;
+  color: #cbd5e1;
   border: none;
   font-family: var(--font-family);
-  font-size: 0.78rem;
+  font-size: 0.64rem;
   font-weight: 800;
-  padding: 8px 14px;
-  border-radius: var(--radius-full);
+  letter-spacing: 0.03em;
+  padding: 10px 4px;
+  border-radius: 11px 0 0 11px;
   cursor: pointer;
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  white-space: nowrap;
-  transition: var(--transition);
+  gap: 3px;
+  transition: color 0.22s ease;
 }
 
-.inline-mode-opt:hover {
+.side-tab-btn:hover {
   color: #fde68a;
 }
 
-.inline-mode-opt.active {
-  background: linear-gradient(135deg, #fbbf24 0%, #e5a00d 100%);
+.side-tab-btn.active {
   color: var(--charcoal-900);
-  box-shadow: 0 3px 10px rgba(229, 160, 13, 0.35);
+}
+
+.side-tab-btn.active:hover {
+  color: var(--charcoal-900);
+}
+
+body.faq-drawer-open .side-mode-tab {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Google Sites iframe embed fix:
-   Fit the entire chatbot (slim topbar + scrollable messages + pinned bottom input)
-   cleanly inside the visible screen beneath Google Sites' ~58px header so
-   scrolling chat messages up/down NEVER hides the text input box! */
+   Keep the entire chatbot strictly inside the visible screen beneath Google Sites' header
+   so ONLY .jhep-ai-scroll scrolls and the bottom text input NEVER disappears! */
 html:has(body.is-embedded),
 body.is-embedded {
   height: 100%;
@@ -2521,8 +2556,12 @@ body.is-embedded .chatbot-fullscreen-wrapper {
   left: 0;
   right: 0;
   bottom: auto;
-  height: calc(100dvh - 58px);
+  height: calc(100% - 68px);
   overflow: hidden;
+}
+
+body.is-embedded .jhep-ai-scroll {
+  overscroll-behavior: contain;
 }
 
 body.is-embedded .ai-sidebar-footer {
@@ -2583,15 +2622,9 @@ body.is-embedded .ai-sidebar-footer {
     padding: 0 14px;
   }
 
-  /* Compact Hero for Mobile with clean inline mode bar */
+  /* Compact Hero for Mobile */
   .welcome-hero {
-    padding: 20px 0 32px 0;
-  }
-
-  .inline-mode-bar {
-    display: grid;
-    margin: 0 auto 16px auto;
-    width: 260px;
+    padding: 24px 0 34px 0;
   }
 
   .hero-big-title {
@@ -2777,7 +2810,25 @@ body.is-embedded .ai-sidebar-footer {
   }
 
   body.is-embedded .chatbot-fullscreen-wrapper {
-    height: calc(100dvh - 60px);
+    height: calc(100% - 76px);
+  }
+
+  .side-mode-tab {
+    top: 46%;
+    width: 44px;
+    padding: 3px 2px 3px 3px;
+  }
+
+  .side-tab-pill {
+    top: 3px;
+    left: 3px;
+    right: 2px;
+    height: calc(50% - 3px);
+  }
+
+  .side-tab-btn {
+    padding: 8px 2px;
+    font-size: 0.6rem;
   }
 
   .welcome-modal-card {
