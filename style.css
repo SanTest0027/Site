@@ -1484,10 +1484,12 @@ body {
 .jhep-ai-fullscreen-shell {
   display: grid;
   grid-template-columns: 290px 1fr;
+  grid-template-rows: minmax(0, 1fr);
   width: 100%;
   height: 100%;
   background: var(--site-cream-light);
   position: relative;
+  overflow: hidden;
 }
 
 .ai-sidebar-backdrop {
@@ -1512,6 +1514,7 @@ body {
   flex-direction: column;
   border-right: 2px solid var(--jhep-gold);
   height: 100%;
+  min-height: 0;
   overflow: hidden;
 }
 
@@ -2531,8 +2534,8 @@ body.faq-drawer-open .side-mode-tab {
 }
 
 /* Google Sites iframe embed fix:
-   Keep the entire chatbot strictly inside the visible screen beneath Google Sites' header
-   so ONLY .jhep-ai-scroll scrolls and the bottom text input NEVER disappears! */
+   Google Sites already sizes iframe.YMEQtf to (viewport - 56px) with scrolling="no",
+   so height: 100% fills the EXACT visible area beneath Google Sites' e-JHEP header! */
 html:has(body.is-embedded),
 body.is-embedded {
   height: 100%;
@@ -2541,10 +2544,7 @@ body.is-embedded {
 
 body.is-embedded #view-directory-wrapper {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -2552,11 +2552,8 @@ body.is-embedded #view-directory-wrapper {
 
 body.is-embedded .chatbot-fullscreen-wrapper {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: auto;
-  height: calc(100% - 68px);
+  inset: 0;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -2774,19 +2771,14 @@ body.is-embedded .ai-sidebar-footer {
     padding: 4px 8px;
   }
 
-  /* Mobile Chatbot adjustments: slim topbar, pinned bottom input, zero floating clutter */
+  /* Mobile Chatbot adjustments: slim topbar, pinned bottom input, zero right-edge overflow */
   .jhep-ai-topbar {
     padding: 8px 10px;
   }
 
   .ai-brand-group strong {
-    font-size: 0.88rem;
-  }
-
-  .ai-topbar-dir-btn {
-    display: inline-flex;
-    padding: 6px 10px;
-    font-size: 0.72rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
   }
 
   .jhep-ai-scroll {
@@ -2807,10 +2799,6 @@ body.is-embedded .ai-sidebar-footer {
 
   .jhep-ai-caption {
     display: none;
-  }
-
-  body.is-embedded .chatbot-fullscreen-wrapper {
-    height: calc(100% - 76px);
   }
 
   .side-mode-tab {
