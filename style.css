@@ -2452,7 +2452,7 @@ body::-webkit-scrollbar,
    ========================================================================== */
 .floating-mode-dock {
   position: fixed;
-  bottom: 20px;
+  bottom: 72px;
   right: 18px;
   z-index: 650;
   display: flex;
@@ -2467,7 +2467,7 @@ body::-webkit-scrollbar,
 
 /* In full-screen AI Chatbot mode, lift above the bottom composer so it never overlaps the Send button */
 .floating-mode-dock.in-chat-mode {
-  bottom: 94px;
+  bottom: 112px;
 }
 
 .dock-mode-btn {
@@ -2735,14 +2735,14 @@ body::-webkit-scrollbar,
   }
 
   .floating-mode-dock {
-    bottom: 16px;
+    bottom: 88px;
     right: 12px;
     border-radius: 16px;
     padding: 3px;
   }
 
   .floating-mode-dock.in-chat-mode {
-    bottom: 76px;
+    bottom: 118px;
   }
 
   .dock-mode-btn {
