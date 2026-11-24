@@ -2212,11 +2212,10 @@ body {
   font-weight: 600;
 }
 
-/* ==========================================================================
-   Hide Visible Scrollbars on Desktop & Containers (Smooth Wheel/Touch Scroll)
-   ========================================================================== */
+/* Hide visible scrollbars on desktop & containers while keeping smooth wheel/touch scroll */
 html,
 body,
+#view-directory-wrapper,
 .ai-sidebar-topics,
 .jhep-ai-scroll,
 .short-questions-wrap {
@@ -2226,6 +2225,7 @@ body,
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar,
+#view-directory-wrapper::-webkit-scrollbar,
 .ai-sidebar-topics::-webkit-scrollbar,
 .jhep-ai-scroll::-webkit-scrollbar,
 .short-questions-wrap::-webkit-scrollbar {
@@ -2535,7 +2535,26 @@ body::-webkit-scrollbar,
   display: none;
 }
 
-/* Google Sites iframe embed fix: fit chatbot cleanly inside visible window beneath Google Sites header */
+/* Google Sites iframe embed fix:
+   Lock outer document so ONLY #view-directory-wrapper scrolls internally!
+   This keeps the top-center [Direktori | Tanya AI] toggle 100% visible even when scrolled way down! */
+body.is-embedded {
+  height: 100%;
+  overflow: hidden !important;
+}
+
+body.is-embedded #view-directory-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
 body.is-embedded .chatbot-fullscreen-wrapper {
   top: 0;
   bottom: auto;

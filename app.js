@@ -949,6 +949,7 @@ function switchHubMode(mode, shouldScroll = false) {
       if (input && window.innerWidth > 768) input.focus();
     }, 200);
   } else if (shouldScroll) {
+    if (dirWrap) dirWrap.scrollTo({ top: 0, behavior: "smooth" });
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
